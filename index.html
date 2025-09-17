@@ -5,10 +5,7 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
   <meta content="width=device-width, initial-scale=1" id="wixDesktopViewport" name="viewport"/>
   <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-  <meta content="Wix.com Website Builder" name="generator"/>
-  <link href="https://static.wixstatic.com/media/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png" rel="icon" sizes="192x192" type="image/png"/>
-  <link href="https://static.wixstatic.com/media/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png" rel="shortcut icon" type="image/png"/>
-  <link href="https://static.wixstatic.com/media/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png/v1/fill/w_180%2Ch_180%2Clg_1%2Cusm_0.66_1.00_0.01/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png" rel="apple-touch-icon" type="image/png"/>
+
   <!-- Safari Pinned Tab Icon -->
   <!-- <link rel="mask-icon" href="https://static.wixstatic.com/media/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7436c1_2329953359ae4813b2b8fbe4a6cb2c02%7Emv2.png"> -->
   <!-- Original trials -->
@@ -735,6 +732,36 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
 
 /* evita que “wow-image” poster tape el contenido si queda visible */
 #comp-lcffa9u0_img { display:none !important; }
+/* Altura base del navbar (ajústala si tu barra es más alta/baja) */
+:root { --nav-h: 64px; }
+
+/* Alinea verticalmente el contenido del contenedor del logo */
+#comp-laimmet4inlineContent,
+#comp-laimmet4inlineContent-gridContainer,
+#comp-laiqlf94,
+#comp-laiqlf94 .j7pOnl{
+  display:flex;
+  align-items:center;
+  height: var(--nav-h);
+}
+
+/* El logo: proporción correcta, sin recortes, y nítido */
+#comp-laiqlf94 img{
+  height: min(32px, calc(var(--nav-h) - 20px)); /* 32px o un poco menos que la barra */
+  width: auto;                  /* mantiene proporción */
+  object-fit: contain;          /* evita recortes (mejor que cover para logos) */
+  display: block;
+  image-rendering: auto;
+}
+
+/* Espaciado opcional si lo necesitas */
+#comp-laiqlf94 { padding-left: 8px; }
+
+/* Responsive: navbar un poco más bajo en móviles */
+@media (max-width: 768px){
+  :root { --nav-h: 56px; }
+  #comp-laiqlf94 img{ height: 28px; }
+}
 
   </style>
   <style id="compCssMappers_l84tf">
@@ -896,7 +923,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
                      <a class="itemDepth02233374943__root itemDepth02233374943--isCurrentPage StylableHorizontalMenu3372578893__menuItem itemShared2352141355__menuItem" data-item-label="true" data-testid="linkElement" href="https://www.surgingagency.com/" tabindex="0" target="_self">
                       <div class="itemDepth02233374943__container">
                        <span class="itemDepth02233374943__label wixui-horizontal-menu__item-label">
-                        Home
+                        Inicio
                        </span>
                       </div>
                      </a>
@@ -907,7 +934,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
                      <a class="itemDepth02233374943__root StylableHorizontalMenu3372578893__menuItem itemShared2352141355__menuItem" data-item-label="true" data-testid="linkElement" href="https://www.surgingagency.com/about" tabindex="0" target="_self">
                       <div class="itemDepth02233374943__container">
                        <span class="itemDepth02233374943__label wixui-horizontal-menu__item-label">
-                        About
+                        Acerca de
                        </span>
                       </div>
                      </a>
@@ -918,7 +945,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
                      <a class="itemDepth02233374943__root StylableHorizontalMenu3372578893__menuItem itemShared2352141355__menuItem" data-item-label="true" data-testid="linkElement" href="https://www.surgingagency.com/creators" tabindex="0" target="_self">
                       <div class="itemDepth02233374943__container">
                        <span class="itemDepth02233374943__label wixui-horizontal-menu__item-label">
-                        Creators
+                        Fotgrafia y Produccion
                        </span>
                       </div>
                      </a>
@@ -940,7 +967,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
                      <a class="itemDepth02233374943__root StylableHorizontalMenu3372578893__menuItem itemShared2352141355__menuItem" data-item-label="true" data-testid="linkElement" href="https://www.surgingagency.com/contact" tabindex="0" target="_self">
                       <div class="itemDepth02233374943__container">
                        <span class="itemDepth02233374943__label wixui-horizontal-menu__item-label">
-                        Contact
+                        Contacto
                        </span>
                       </div>
                      </a>
@@ -982,14 +1009,27 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
                 <div class="comp-lcfk3pnr WzbAF8" id="comp-lcfk3pnr">
                  <ul aria-label="Social Bar" class="mpGTIt">
                   <li class="O6KwRn" id="dataItem-lcfk3pnu1-comp-lcfk3pnr">
-                   <a aria-label="Instagram       " class="oRtuWN" data-testid="linkElement" href="https://www.instagram.com/surgingagency/" rel="noreferrer noopener" target="_blank">
+                   <a aria-label="Instagram       " class="oRtuWN" data-testid="linkElement" href="https://www.instagram.com/agencialaxion" rel="noreferrer noopener" target="_blank">
                     <img alt="Instagram       " class="YaS0jR Tj01hh" id="img_0_comp-lcfk3pnr" sizes="undefinedpx" src="./Surging Agency _ Onlyfans management _ Amsterdam, The Netherlands_files/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png" srcset="https://static.wixstatic.com/media/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png/v1/fill/w_25,h_25,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png 1x, https://static.wixstatic.com/media/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png/v1/fill/w_50,h_50,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png 2x" style="object-fit:cover"/>
                    </a>
                   </li>
                   <li class="O6KwRn" id="dataItem-lcfk3pnu2-comp-lcfk3pnr">
-                   <a aria-label="LinkedIn" class="oRtuWN" data-testid="linkElement" href="https://www.linkedin.com/in/surging-agency-42411225b" rel="noreferrer noopener" target="_blank">
-                    <img alt="LinkedIn" class="YaS0jR Tj01hh" id="img_1_comp-lcfk3pnr" sizes="undefinedpx" src="./Surging Agency _ Onlyfans management _ Amsterdam, The Netherlands_files/11062b_72c275822d4344358ee379f14e7e115f~mv2.png" srcset="https://static.wixstatic.com/media/11062b_72c275822d4344358ee379f14e7e115f~mv2.png/v1/fill/w_25,h_25,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_72c275822d4344358ee379f14e7e115f~mv2.png 1x, https://static.wixstatic.com/media/11062b_72c275822d4344358ee379f14e7e115f~mv2.png/v1/fill/w_50,h_50,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_72c275822d4344358ee379f14e7e115f~mv2.png 2x" style="object-fit:cover"/>
-                   </a>
+                  <a aria-label="TikTok"
+   class="oRtuWN"
+   data-testid="linkElement"
+   href="https://www.tiktok.com/agenciaspartalaxion"
+   rel="noreferrer noopener"
+   target="_blank">
+  <img
+    alt="TikTok"
+    class="YaS0jR Tj01hh"
+    width="22"
+    height="22"
+    src="https://api.iconify.design/simple-icons/tiktok.svg?color=%23000000"
+    style="object-fit:cover"
+  />
+</a>
+
                   </li>
                  </ul>
                 </div>
@@ -3070,7 +3110,7 @@ function positionBlob(){
                    <span class="wixui-rich-text__text" style="font-family:wfont_0b678c_d87218317904465c93d13848ee71a208,wf_d87218317904465c93d13848e,orig_argentum_sans_light;">
                     <span class="wixui-rich-text__text" style="font-size:20px;">
                      <span class="wixui-rich-text__text" style="font-style:normal;">
-                      Full-service management and marketing agency.
+                      Agencia de gestión y marketing integral.
                      </span>
                     </span>
                    </span>
@@ -3083,9 +3123,9 @@ function positionBlob(){
                    <span class="wixui-rich-text__text" style="font-family:wfont_0b678c_d87218317904465c93d13848ee71a208,wf_d87218317904465c93d13848e,orig_argentum_sans_light;">
                     <span class="color_29 wixui-rich-text__text">
                      <span class="wixui-rich-text__text" style="font-style:normal;">
-                      The Netherlands based.
+                      Monterrey, Nuevo León
                       <br class="wixui-rich-text__text"/>
-                      KvK (Chamber of Commerce): 89270916
+                      
                      </span>
                     </span>
                    </span>
@@ -3098,7 +3138,7 @@ function positionBlob(){
                    <span class="wixui-rich-text__text" style="font-family:wfont_0b678c_d87218317904465c93d13848ee71a208,wf_d87218317904465c93d13848e,orig_argentum_sans_light;">
                     <span class="color_15 wixui-rich-text__text">
                      <span class="wixui-rich-text__text" style="letter-spacing:normal;">
-                      ©2024 Surging Agency, All Rights Reserved.
+                      ©2025 Sparta Laxion, All Rights Reserved.
                      </span>
                     </span>
                    </span>
@@ -3131,7 +3171,7 @@ function positionBlob(){
                       <br class="wixui-rich-text__text"/>
                       <span class="wixui-rich-text__text" style="text-decoration:underline;">
                        <a class="wixui-rich-text__text" href="https://www.surgingagency.com/contact" target="_self">
-                        Contact
+                        Contacto
                        </a>
                       </span>
                      </span>
@@ -3143,13 +3183,13 @@ function positionBlob(){
                      <span class="wixui-rich-text__text" style="font-style:normal;">
                       <span class="wixui-rich-text__text" style="text-decoration:underline;">
                        <a class="wixui-rich-text__text" href="https://www.surgingagency.com/terms-of-service" target="_self">
-                        Terms of service
+                        Términos del servicio
                        </a>
                       </span>
                       <br class="wixui-rich-text__text"/>
                       <span class="wixui-rich-text__text" style="text-decoration:underline;">
                        <a class="wixui-rich-text__text" href="https://www.surgingagency.com/privacy-policy" target="_self">
-                        Privacy policy
+                        Política de privacidad
                        </a>
                       </span>
                      </span>
@@ -3165,7 +3205,7 @@ function positionBlob(){
                     <span class="wixui-rich-text__text" style="font-family:wfont_0b678c_d87218317904465c93d13848ee71a208,wf_d87218317904465c93d13848e,orig_argentum_sans_light;">
                      <span class="wixui-rich-text__text" style="font-style:normal;">
                       <a class="wixui-rich-text__text" href="mailto:contact@slaatsmedia.com" target="_self">
-                       contact@surgingagency.com
+                       spartalaxion@gmail.com
                       </a>
                      </span>
                     </span>
@@ -3176,14 +3216,27 @@ function positionBlob(){
                 <div class="comp-lc0kyevu WzbAF8" id="comp-lc0kyevu">
                  <ul aria-label="Social Bar" class="mpGTIt">
                   <li class="O6KwRn" id="dataItem-lc0kyew0-comp-lc0kyevu">
-                   <a aria-label="Instagram " class="oRtuWN" data-testid="linkElement" href="https://www.instagram.com/surgingagency/" rel="noreferrer noopener" target="_blank">
+                   <a aria-label="Instagram " class="oRtuWN" data-testid="linkElement" href="https://www.instagram.com/agencialaxion/" rel="noreferrer noopener" target="_blank">
                     <img alt="Instagram " class="YaS0jR Tj01hh" id="img_0_comp-lc0kyevu" sizes="undefinedpx" src="./Surging Agency _ Onlyfans management _ Amsterdam, The Netherlands_files/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" srcset="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_22,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png 1x, https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png 2x" style="object-fit:cover"/>
                    </a>
                   </li>
                   <li class="O6KwRn" id="dataItem-lc0kyew3-comp-lc0kyevu">
-                   <a aria-label="LinkedIn" class="oRtuWN" data-testid="linkElement" href="https://www.linkedin.com/in/surging-agency-42411225b" rel="noreferrer noopener" target="_blank">
-                    <img alt="LinkedIn" class="YaS0jR Tj01hh" id="img_1_comp-lc0kyevu" sizes="undefinedpx" src="./Surging Agency _ Onlyfans management _ Amsterdam, The Netherlands_files/11062b_b5690303a8ff470e9b1c03a24aff140b~mv2.png" srcset="https://static.wixstatic.com/media/11062b_b5690303a8ff470e9b1c03a24aff140b~mv2.png/v1/fill/w_22,h_22,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_b5690303a8ff470e9b1c03a24aff140b~mv2.png 1x, https://static.wixstatic.com/media/11062b_b5690303a8ff470e9b1c03a24aff140b~mv2.png/v1/fill/w_44,h_44,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_b5690303a8ff470e9b1c03a24aff140b~mv2.png 2x" style="object-fit:cover"/>
-                   </a>
+                   <a aria-label="TikTok"
+   class="oRtuWN"
+   data-testid="linkElement"
+   href="https://www.tiktok.com/agenciaspartalaxion"
+   rel="noreferrer noopener"
+   target="_blank">
+  <img
+    alt="TikTok"
+    class="YaS0jR Tj01hh"
+    width="22"
+    height="22"
+    src="https://api.iconify.design/simple-icons/tiktok.svg?color=%23ffffff"
+    style="object-fit:cover"
+  />
+</a>
+
                   </li>
                  </ul>
                 </div>
