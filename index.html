@@ -2073,7 +2073,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
   <div class="expect__container">
     <div class="expect__left">
       <h2 class="expect__title">
-        What<br>To<br>Expect?
+        ¿Qué<br>esperar?
       </h2>
     </div>
 
@@ -2081,27 +2081,27 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
       <!-- Métrica 1 -->
       <div class="expect__metric">
         <div class="expect__value" data-count="5">0</div>
-        <div class="expect__label">Figure</div>
-        <p class="expect__desc">Average monthly income.</p>
+        <div class="expect__label">Figuras</div>
+        <p class="expect__desc">Ingreso mensual promedio.</p>
       </div>
 
       <!-- Métrica 2 -->
       <div class="expect__metric">
         <div class="expect__value" data-count="1000">0</div>
         <div class="expect__label">Fans</div>
-        <p class="expect__desc">Average weekly growth.</p>
+        <p class="expect__desc">Crecimiento semanal promedio.</p>
       </div>
 
       <!-- Métrica 3 -->
       <div class="expect__metric">
         <div class="expect__value" data-count="100">0</div>
-        <div class="expect__label">Million</div>
-        <p class="expect__desc">Average views per week with our Marketing Strategy.</p>
+        <div class="expect__label">Millón</div>
+        <p class="expect__desc">Promedio de vistas por semana con nuestra estrategia de marketing.</p>
       </div>
 
       <p class="expect__guarantee">
-        With <strong>1.5+ million</strong> Onlyfans accounts, we guarantee your
-        account will be in the top <strong>1%</strong> within the <strong>first month.</strong>
+        Con <strong>1.5+ millones</strong> de cuentas de Only
+        La cuenta estará en la parte superior. <strong>1%</strong> dentro del <strong>primer mes.</strong>
       </p>
     </div>
   </div>
@@ -2486,56 +2486,62 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
   </div>
 </section>
 
-<!-- ===== ESTILOS (derecha, video → canvas) ===== -->
-<!-- ===== OVERRIDES (derecha) ===== -->
-<!-- ===== OVERRIDES (derecha) ===== -->
 <style>
-/* Tipos */
+/* ====== Tipos ====== */
 .guar__title{ font-family:"Cabinet Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
 .guar__lead,.guar__sub,.guar__btn{ font-family:"Argentum Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
 
-/* Contenedor derecha con stacking propio */
+/* ====== Contenedor derecha ====== */
 #guar.guar{
-  --text:#0F0F0F; --muted:#353535;
+  --text:#0F0F0F;
+  --muted:#353535;
+
+  /* controla el blob sin tocar JS */
+  --blob-size: clamp(260px, 26vw, 460px);
+  --blob-cx: 62%;   /* 62% del ancho del título */
+  --blob-cy: 40%;   /* 40% del alto del título */
+
   color:var(--text);
-  max-width:960px;
-  margin:0 auto;
-  padding:0 clamp(8px,2.5vw,12px);
-  position:relative;
-  isolation:isolate;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(8px, 2.5vw, 12px);
+  position: relative;
+  isolation: isolate;         /* asegura z-index: canvas detrás */
 }
 
-/* Video fuente oculto (sigue corriendo) */
+/* vídeo fuente oculto (sigue reproduciendo) */
 .guar__videoSrc{ display:none; }
 
-/* Canvas del blob por detrás del texto */
+/* canvas del blob (detrás del título) */
 .guar__blob{
   position:absolute; left:0; top:0;
-  width:320px; height:320px;
+  width: var(--blob-size);
+  height: var(--blob-size);
   z-index:0;
   pointer-events:none;
   filter:saturate(1.02) contrast(1.02);
 }
 
-/* Texto un poco más chico */
+/* ====== Título + textos (más chico/compacto) ====== */
 .guar__title{
   position:relative; z-index:2;
   font-weight:800;
-  font-size:clamp(34px,4.2vw,60px);
-  line-height:1.05;
+  font-size: clamp(38px, 5.2vw, 72px);  /* ↓ más chico */
+  line-height:1.06;
   letter-spacing:0;
   margin:0 0 10px 0;
+  text-wrap:balance;
 }
 .guar__lead{
   position:relative; z-index:2;
-  font-size:clamp(15px,1.6vw,20px);
+  font-size: clamp(16px, 1.7vw, 22px);
   line-height:1.55;
-  margin:12px 0 6px;
-  max-width:780px;
+  max-width: 780px;
+  margin: 12px 0 6px;
 }
 .guar__sub{
   position:relative; z-index:2;
-  font-size:clamp(13px,1.25vw,16px);
+  font-size: clamp(14px, 1.3vw, 16px);
   color:var(--muted);
   margin:0 0 18px 0;
 }
@@ -2551,257 +2557,284 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
 .guar__btn:hover{ transform:translateY(-1px); background:#0F0F0F; color:#fff; }
 .guar__btnIcon{ transition:transform .2s ease; }
 .guar__btn:hover .guar__btnIcon{ transform:translateX(4px); }
+
+/* Fino responsive */
+/* Desktop: baja y centra el blob sobre el título */
+@media (min-width: 1024px){
+  #guar.guar{
+    /* un pelín más pequeño y más abajo */
+    --blob-size: clamp(260px, 22vw, 420px);
+    --blob-cx: 60%;  /* centrado horizontal aprox. sobre “GARANTIZADO / GUARANTEED” */
+    --blob-cy: 62%;  /* ↓ más abajo (antes ~40%) */
+  }
+}
+
+/* Opcional: pequeño ajuste en móviles */
+@media (max-width: 740px){
+  #guar.guar{
+    --blob-size: clamp(200px, 42vw, 320px);
+    --blob-cx: 62%;
+    --blob-cy: 54%;
+  }
+}
+
 </style>
-
-
 <script>
+/* ====== VIDEO -> CANVAS (círculo con máscara y tinte) + posicionamiento ====== */
 (function(){
-  const canvas = document.getElementById('guarBlob');
-  const video  = document.getElementById('guarSrc');
-  const title  = document.querySelector('.guar__title');
+  const canvas    = document.getElementById('guarBlob');
+  const video     = document.getElementById('guarSrc');
+  const title     = document.querySelector('.guar__title');
   const container = document.getElementById('guar');
-  if (!canvas || !title || !container) return;
+  // ===== AJUSTES RÁPIDOS (mueve el blob sin pelearte con CSS) =====
+const KX = 0.62;          // 0 = borde izq del título, 1 = borde der  → mueve HORIZONTAL
+const KY = 0.82;          // 0 = arriba del título, 1 = abajo        → **BAJA** el blob
+const SIZE_FACTOR = 1.28; // tamaño relativo al alto del título
+
+function positionBlob(){
+  const rTitle = title.getBoundingClientRect();
+  const rCont  = container.getBoundingClientRect();
+
+  // Tamaño del blob (ligado al alto del título)
+  const size = Math.min(rTitle.height * SIZE_FACTOR, rCont.width * 0.42);
+  canvas.style.width  = size + 'px';
+  canvas.style.height = size + 'px';
+
+  // Centro del blob: usa KX/KY para ubicarlo sobre el texto
+  const centerX = (rTitle.left - rCont.left) + rTitle.width  * KX;
+  const centerY = (rTitle.top  - rCont.top)  + rTitle.height * KY; // <- más abajo
+
+  // Coloca el canvas
+  const x = Math.round(centerX - size / 2);
+  const y = Math.round(centerY - size / 2);
+  canvas.style.transform = `translate(${x}px, ${y}px)`;
+
+  // Backing store del canvas según el CSS aplicado
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width  = Math.floor(size * dpr);
+  canvas.height = Math.floor(size * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+  if (!canvas || !video || !title || !container) return;
 
   const ctx = canvas.getContext('2d', { alpha:true });
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-  // Parámetros de colocación y look (ajusta si quieres afinar)
-  const CFG = {
-    sizeK: 1.55,                      // tamaño = alto del título * sizeK
-    xK: 0.52,                         // 0=izda del título, 1=dcha del título
-    yK: 0.44,                         // 0=arriba del título, 1=abajo del título
-    videoAlpha: 0.85,
-    tintFilter: 'hue-rotate(-128deg) saturate(1.05) contrast(1.08)',
-    haloStrength: 0.10
-  };
+  function cssNum(v){ return parseFloat(String(v).replace('%','')); }
 
   function positionBlob(){
     const rTitle = title.getBoundingClientRect();
     const rCont  = container.getBoundingClientRect();
+    const cs     = getComputedStyle(container);
 
-    // Tamaño del blob y centrado relativo al título
-    const size = Math.min(rTitle.height * CFG.sizeK, rCont.width * 0.40);
-    canvas.style.width  = size + 'px';
-    canvas.style.height = size + 'px';
+    // tamaño desde CSS var
+    const sizePx = parseFloat(getComputedStyle(canvas).width) || parseFloat(cs.getPropertyValue('--blob-size'));
+    const size   = Math.max(200, Math.floor(sizePx));
 
-    const centerX = (rTitle.left - rCont.left) + rTitle.width  * CFG.xK;
-    const centerY = (rTitle.top  - rCont.top ) + rTitle.height * CFG.yK;
+    // ratios desde CSS vars
+    const cxr = (cssNum(cs.getPropertyValue('--blob-cx')) || 62)/100;
+    const cyr = (cssNum(cs.getPropertyValue('--blob-cy')) || 40)/100;
 
-    const x = Math.round(centerX - size/2);
-    const y = Math.round(centerY - size/2);
-    canvas.style.transform = `translate(${x}px, ${y}px)`;
+    // centro dentro del título
+    const centerX = (rTitle.left - rCont.left) + rTitle.width  * cxr;
+    const centerY = (rTitle.top  - rCont.top ) + rTitle.height * cyr;
 
-    // Backing store del canvas según tamaño CSS
-    const w = Math.max(200, Math.floor(size));
-    const h = w;
-    canvas.width  = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // situar canvas
+    canvas.style.transform = `translate(${Math.round(centerX - size/2)}px, ${Math.round(centerY - size/2)}px)`;
+    canvas.width  = Math.floor(size * dpr);
+    canvas.height = Math.floor(size * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
 
-  // "object-fit: cover" manual
+  // Ajuste para “object-fit: cover”
   function coverRect(sw, sh, dw, dh){
     const s = Math.max(dw/sw, dh/sh);
-    const w2 = sw*s, h2 = sh*s;
-    return { dx:(dw-w2)/2, dy:(dh-h2)/2, dw:w2, dh:h2 };
+    return { dx:(dw-sw*s)/2, dy:(dh-sh*s)/2, dw:sw*s, dh:sh*s };
   }
 
   function draw(){
-    const cssW = parseFloat(getComputedStyle(canvas).width)  || 0;
-    const cssH = parseFloat(getComputedStyle(canvas).height) || 0;
-    if (!cssW || !cssH) { requestAnimationFrame(draw); return; }
+    const w = canvas.width / dpr, h = canvas.height / dpr;
+    if (!w || !h) { requestAnimationFrame(draw); return; }
 
-    // Backing store seguro
-    const needW = Math.floor(cssW * dpr), needH = Math.floor(cssH * dpr);
-    if (canvas.width !== needW || canvas.height !== needH){
-      canvas.width  = needW; canvas.height = needH;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
+    ctx.clearRect(0,0,w,h);
 
-    ctx.clearRect(0,0,cssW,cssH);
+    if (video.readyState >= 2){
+      const r = coverRect(video.videoWidth||w, video.videoHeight||h, w, h);
 
-    // --- Dibujo dentro de un círculo (no cuadrado) ---
-    const cx = cssW * 0.5, cy = cssH * 0.5, R = Math.min(cssW, cssH) * 0.48;
-    ctx.save();
-    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.clip();
-
-    // 1) Base verdosa (asegura que el blob se vea, aunque el video sea claro)
-    const base = ctx.createRadialGradient(cx, cy, R*0.15, cx, cy, R);
-    base.addColorStop(0.00, 'rgba(160,237,200,.85)');
-    base.addColorStop(0.55, 'rgba(120,210,170,.55)');
-    base.addColorStop(1.00, 'rgba(110,170,150,.15)');
-    ctx.fillStyle = base;
-    ctx.fillRect(0,0,cssW,cssH);
-
-    // 2) Video como textura encima (teñido a verde)
-    if (video && video.readyState >= 2){
-      const r = coverRect(video.videoWidth||cssW, video.videoHeight||cssH, cssW, cssH);
-      ctx.globalAlpha = CFG.videoAlpha;
-      ctx.globalCompositeOperation = 'overlay';     // textura
-      ctx.filter = CFG.tintFilter;
+      // 1) frame con tinte (como Wix)
+      ctx.save();
+      ctx.filter = 'hue-rotate(-133deg) saturate(0.7)';
       ctx.drawImage(video, r.dx, r.dy, r.dw, r.dh);
-      ctx.filter = 'none';
+      ctx.restore();
+
+      // 2) máscara circular perfecta (sin bordes cuadrados)
+      const R  = Math.min(w,h)*0.48, cx=w*0.5, cy=h*0.5;
+      const m  = ctx.createRadialGradient(cx,cy,R*0.2, cx,cy,R);
+      m.addColorStop(0,'rgba(0,0,0,1)');
+      m.addColorStop(0.85,'rgba(0,0,0,1)');
+      m.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.fillStyle = m;
+      ctx.fillRect(0,0,w,h);
       ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = 1;
+
+      // 3) halo suave
+      const halo = ctx.createRadialGradient(cx,cy,R*0.12, cx,cy,R);
+      halo.addColorStop(0,'rgba(100,180,150,.08)');
+      halo.addColorStop(1,'rgba(100,180,150,0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
     }
-
-    // 3) Suavizado del borde (fade hacia fuera)
-    ctx.globalCompositeOperation = 'destination-out';
-    const fade = ctx.createRadialGradient(cx, cy, R*0.75, cx, cy, R);
-    fade.addColorStop(0,'rgba(0,0,0,0)');
-    fade.addColorStop(1,'rgba(0,0,0,1)');
-    ctx.fillStyle = fade;
-    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fill();
-    ctx.globalCompositeOperation = 'source-over';
-
-    // 4) Halo exterior sutil
-    const halo = ctx.createRadialGradient(cx, cy, R*0.1, cx, cy, R*1.08);
-    halo.addColorStop(0, `rgba(100,180,150, ${CFG.haloStrength})`);
-    halo.addColorStop(1, 'rgba(100,180,150,0)');
-    ctx.fillStyle = halo;
-    ctx.beginPath(); ctx.arc(cx, cy, R*1.02, 0, Math.PI*2); ctx.fill();
-
-    ctx.restore();
     requestAnimationFrame(draw);
   }
 
   const start = () => {
     positionBlob();
-    // intenta reproducir el video (si existe)
-    if (video) video.play().catch(()=>{ /* ok */ });
+    video.play().catch(()=>{});
     requestAnimationFrame(draw);
   };
 
   window.addEventListener('resize', positionBlob, {passive:true});
-  window.addEventListener('scroll', positionBlob,  {passive:true});
+  window.addEventListener('scroll', positionBlob, {passive:true});
 
-  if (video && video.readyState >= 2) start();
-  else if (video) video.addEventListener('canplay', start, {once:true});
-  else start();
+  if (video.readyState >= 2) start();
+  else video.addEventListener('canplay', start, {once:true});
 })();
 </script>
 
-              <section class="Oqnisf comp-lbvapov8 wixui-section" data-block-level-container="ClassicSection" id="comp-lbvapov8" tabindex="-1">
-               <div class="MW5IWV" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lbvapov8" id="bgLayers_comp-lbvapov8">
-                <div class="LWbAav Kv1aVt" data-testid="colorUnderlay">
-                </div>
-                <div class="VgO9Yg" data-motion-part="BG_MEDIA comp-lbvapov8" id="bgMedia_comp-lbvapov8">
-                </div>
-               </div>
-               <div class="" data-mesh-id="comp-lbvapov8inlineContent" data-testid="inline-content">
-                <div data-mesh-id="comp-lbvapov8inlineContent-gridContainer" data-testid="mesh-container-content">
-                 <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lbvapoxx wixui-rich-text" data-testid="richTextElement" id="comp-lbvapoxx">
-                  <h2 class="font_0 wixui-rich-text__text" style="font-size:56px; text-align:center;">
-                   <span class="wixui-rich-text__text" style="font-family:wfont_154d86_2be5d35b873c49ecb1ef2f797dd60725,wf_2be5d35b873c49ecb1ef2f797,orig_cabinet_grotesk_bold;">
-                    <span class="wixui-rich-text__text" style="color:#0F0F0F;">
-                     <span class="wixui-rich-text__text" style="font-size:56px;">
-                      Our Clients Say:
-                     </span>
-                    </span>
-                   </span>
-                  </h2>
-                 </div>
-                 <div aria-label="Slideshow" class="comp-lbvapoy4 mDzRgi ENJ6Ca ignore-focus wixui-slideshow" id="comp-lbvapoy4" role="region" tabindex="-1">
-                  <button aria-label="Previous" class="XvQ3FE CdshHv" data-testid="prevButton">
-                   <svg viewbox="0 0 39 11" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m33.5 0-.7.7L37.1 5H0v1h37.1l-4.3 4.3.7.7L39 5.5z">
-                    </path>
-                   </svg>
-                  </button>
-                  <button aria-label="Next" class="XvQ3FE Qinjwp" data-testid="nextButton">
-                   <svg viewbox="0 0 39 11" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m33.5 0-.7.7L37.1 5H0v1h37.1l-4.3 4.3.7.7L39 5.5z">
-                    </path>
-                   </svg>
-                  </button>
-                  <div aria-live="off" class="hDJzl4" data-testid="slidesWrapper">
-                   <div class="comp-lbvapoy71 imK94d" id="comp-lbvapoy71">
-                    <div class="MW5IWV eF_jBL" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lbvapoy71" id="bgLayers_comp-lbvapoy71">
-                     <div class="LWbAav Kv1aVt" data-testid="colorUnderlay">
-                     </div>
-                     <div class="VgO9Yg" data-motion-part="BG_MEDIA comp-lbvapoy71" id="bgMedia_comp-lbvapoy71">
-                     </div>
-                    </div>
-                    <div class="wfm0FO">
-                    </div>
-                    <div class="" data-mesh-id="comp-lbvapoy71inlineContent" data-testid="inline-content">
-                     <div data-mesh-id="comp-lbvapoy71inlineContent-gridContainer" data-testid="mesh-container-content">
-                      <div class="MazNVa comp-lbvbl382 wixui-image" id="comp-lbvbl382">
-                       <div class="j7pOnl" data-testid="linkElement">
-                        <img alt="photo_2025-07-22_22-11-16.jpg" class="BI8PVQ Tj01hh" height="384" id="img_comp-lbvbl382" loading="lazy" sizes="274px" src="./Surging Agency _ Onlyfans management _ Amsterdam, The Netherlands_files/photo_2025-07-22_22-11-16.jpg" srcset="https://static.wixstatic.com/media/7436c1_02b9e88c8949459e9bdd4dc66f5a6925~mv2.jpg/v1/crop/x_23,y_0,w_913,h_1280/fill/w_274,h_384,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/photo_2025-07-22_22-11-16.jpg 1x, https://static.wixstatic.com/media/7436c1_02b9e88c8949459e9bdd4dc66f5a6925~mv2.jpg/v1/crop/x_23,y_0,w_913,h_1280/fill/w_548,h_768,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/photo_2025-07-22_22-11-16.jpg 2x" style="object-fit:cover" width="274"/>
-                       </div>
-                      </div>
-                      <div class="KaEeLN comp-lbvapoyi" id="comp-lbvapoyi">
-                       <div class="uYj0Sg wixui-box" data-testid="container-bg">
-                       </div>
-                       <div class="" data-mesh-id="comp-lbvapoyiinlineContent" data-testid="inline-content">
-                        <div data-mesh-id="comp-lbvapoyiinlineContent-gridContainer" data-testid="mesh-container-content">
-                         <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lbvapoyj1 wixui-rich-text" data-testid="richTextElement" id="comp-lbvapoyj1">
-                          <blockquote class="font_6 wixui-rich-text__text" style="font-size:23px; line-height:1.4em;">
-                           <span class="wixui-rich-text__text" style="font-size:23px;">
-                            <span class="wixui-rich-text__text" style="letter-spacing:normal;">
-                             "Surging Ageny has done a really good job taking care of my account. They've been able to triple my earnings in the first few weeks!
-                            </span>
-                           </span>
-                          </blockquote>
-                          <blockquote class="font_6 wixui-rich-text__text" style="font-size:23px; line-height:1.4em;">
-                           <span class="wixui-rich-text__text" style="font-size:23px;">
-                            <span class="wixui-rich-text__text" style="letter-spacing:normal;">
-                             <span class="wixGuard wixui-rich-text__text">
-                              ​
-                             </span>
-                            </span>
-                           </span>
-                          </blockquote>
-                          <blockquote class="font_6 wixui-rich-text__text" style="font-size:23px; line-height:1.4em;">
-                           <span class="wixui-rich-text__text" style="font-size:23px;">
-                            <span class="wixui-rich-text__text" style="letter-spacing:normal;">
-                             10/10
-                            </span>
-                           </span>
-                           <span class="wixui-rich-text__text" style="font-size:23px;">
-                            <span class="wixui-rich-text__text" style="letter-spacing:normal;">
-                             would recommend!"
-                            </span>
-                           </span>
-                          </blockquote>
-                         </div>
-                         <div class="comp-lbvapoyl aVng1S wixui-horizontal-line" id="comp-lbvapoyl">
-                         </div>
-                         <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lbvapoym3 wixui-rich-text" data-testid="richTextElement" id="comp-lbvapoym3">
-                          <p class="font_5 wixui-rich-text__text" style="font-size:17px; line-height:normal;">
-                           <span class="wixui-rich-text__text" style="font-size:17px;">
-                            <span class="wixui-rich-text__text" style="font-family:wfont_0b678c_d87218317904465c93d13848ee71a208,wf_d87218317904465c93d13848e,orig_argentum_sans_light;">
-                             <span class="wixui-rich-text__text" style="letter-spacing:normal;">
-                              - Spicy Lillian
-                             </span>
-                            </span>
-                           </span>
-                          </p>
-                         </div>
-                        </div>
-                       </div>
-                      </div>
-                     </div>
-                    </div>
-                   </div>
+
+  <section class="Oqnisf comp-lbvapov8 wixui-section" data-block-level-container="ClassicSection" id="comp-lbvapov8" tabindex="-1">
+  <div class="MW5IWV" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lbvapov8" id="bgLayers_comp-lbvapov8">
+    <div class="LWbAav Kv1aVt" data-testid="colorUnderlay"></div>
+    <div class="VgO9Yg" data-motion-part="BG_MEDIA comp-lbvapov8" id="bgMedia_comp-lbvapov8"></div>
+  </div>
+
+  <div class="" data-mesh-id="comp-lbvapov8inlineContent" data-testid="inline-content">
+
+    <!-- ===== TÍTULO FIJO ARRIBA (fuera del mesh/grid de Wix) ===== -->
+    <h2 class="ocs-title-standalone">Our Clients Say:</h2>
+    <!-- ========================================================== -->
+
+    <div data-mesh-id="comp-lbvapov8inlineContent-gridContainer" data-testid="mesh-container-content">
+      <!-- (Deja este bloque como está; puede seguir existiendo aunque Wix lo oculte) -->
+      <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lbvapoxx wixui-rich-text" data-testid="richTextElement" id="comp-lbvapoxx">
+        <h2 class="font_0 wixui-rich-text__text" style="font-size:56px; text-align:center;">
+          <span class="wixui-rich-text__text" style="font-family:wfont_154d86_2be5d35b873c49ecb1ef2f797dd60725,wf_2be5d35b873c49ecb1ef2f797,orig_cabinet_grotesk_bold;">
+            <span class="wixui-rich-text__text" style="color:#0F0F0F;">
+              <span id="ocs-title" class="wixui-rich-text__text" style="font-size:56px;">
+                Our Clients Say:
+              </span>
+            </span>
+          </span>
+        </h2>
+      </div>
+
+      <div aria-label="Slideshow" class="comp-lbvapoy4 mDzRgi ENJ6Ca ignore-focus wixui-slideshow" id="comp-lbvapoy4" role="region" tabindex="-1">
+        <button aria-label="Previous" class="XvQ3FE CdshHv" data-testid="prevButton">
+          <svg viewBox="0 0 39 11" xmlns="http://www.w3.org/2000/svg"><path d="m33.5 0-.7.7L37.1 5H0v1h37.1l-4.3 4.3.7.7L39 5.5z"></path></svg>
+        </button>
+        <button aria-label="Next" class="XvQ3FE Qinjwp" data-testid="nextButton">
+          <svg viewBox="0 0 39 11" xmlns="http://www.w3.org/2000/svg"><path d="m33.5 0-.7.7L37.1 5H0v1h37.1l-4.3 4.3.7.7L39 5.5z"></path></svg>
+        </button>
+
+        <div aria-live="off" class="hDJzl4" data-testid="slidesWrapper">
+          <div class="comp-lbvapoy71 imK94d" id="comp-lbvapoy71">
+            <div class="MW5IWV eF_jBL" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lbvapoy71" id="bgLayers_comp-lbvapoy71">
+              <div class="LWbAav Kv1aVt" data-testid="colorUnderlay"></div>
+              <div class="VgO9Yg" data-motion-part="BG_MEDIA comp-lbvapoy71" id="bgMedia_comp-lbvapoy71"></div>
+            </div>
+            <div class="wfm0FO"></div>
+
+            <div class="" data-mesh-id="comp-lbvapoy71inlineContent" data-testid="inline-content">
+              <div data-mesh-id="comp-lbvapoy71inlineContent-gridContainer" data-testid="mesh-container-content">
+
+                <div class="MazNVa comp-lbvbl382 wixui-image" id="comp-lbvbl382">
+                  <div class="j7pOnl" data-testid="linkElement">
+                    <img alt="photo_2025-07-22_22-11-16.jpg" class="BI8PVQ Tj01hh" height="384" id="img_comp-lbvbl382" loading="lazy" sizes="274px" src="./Surging Agency _ Onlyfans management _ Amsterdam, The Netherlands_files/photo_2025-07-22_22-11-16.jpg" srcset="https://static.wixstatic.com/media/7436c1_02b9e88c8949459e9bdd4dc66f5a6925~mv2.jpg/v1/crop/x_23,y_0,w_913,h_1280/fill/w_274,h_384,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/photo_2025-07-22_22-11-16.jpg 1x, https://static.wixstatic.com/media/7436c1_02b9e88c8949459e9bdd4dc66f5a6925~mv2.jpg/v1/crop/x_23,y_0,w_913,h_1280/fill/w_548,h_768,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/photo_2025-07-22_22-11-16.jpg 2x" style="object-fit:cover" width="274">
                   </div>
-                  <nav aria-label="Slides" class="lZ5yqT">
-                   <ol class="dZxZOk">
-                    <li aria-current="true">
-                     <a aria-label="Molly Mckayy" class="ZVUGJp Ale4Rm" href="https://www.surgingagency.com/#comp-lbvapoy71">
-                     </a>
-                    </li>
-                    <li>
-                     <a aria-label="Danura" class="ZVUGJp" href="https://www.surgingagency.com/#comp-lkgx6vam">
-                     </a>
-                    </li>
-                   </ol>
-                  </nav>
-                 </div>
                 </div>
-               </div>
-              </section>
+
+                <div class="KaEeLN comp-lbvapoyi" id="comp-lbvapoyi">
+                  <div class="uYj0Sg wixui-box" data-testid="container-bg"></div>
+
+                  <div class="" data-mesh-id="comp-lbvapoyiinlineContent" data-testid="inline-content">
+                    <div data-mesh-id="comp-lbvapoyiinlineContent-gridContainer" data-testid="mesh-container-content">
+
+                      <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lbvapoyj1 wixui-rich-text" data-testid="richTextElement" id="comp-lbvapoyj1">
+                        <blockquote class="font_6 wixui-rich-text__text" style="font-size:23px; line-height:1.4em;">
+                          <span class="wixui-rich-text__text" style="font-size:23px;">
+                            <span class="wixui-rich-text__text" style="letter-spacing:normal">
+                              "Surging Ageny has done a really good job taking care of my account. They've been able to triple my earnings in the first few weeks!
+                            </span>
+                          </span>
+                        </blockquote>
+                        <blockquote class="font_6 wixui-rich-text__text" style="font-size:23px; line-height:1.4em;">
+                          <span class="wixui-rich-text__text" style="font-size:23px;">
+                            <span class="wixui-rich-text__text" style="letter-spacing:normal">
+                              <span class="wixGuard wixui-rich-text__text"> ​ </span>
+                            </span>
+                          </span>
+                        </blockquote>
+                        <blockquote class="font_6 wixui-rich-text__text" style="font-size:23px; line-height:1.4em;">
+                          <span class="wixui-rich-text__text" style="font-size:23px;">
+                            <span class="wixui-rich-text__text" style="letter-spacing:normal">10/10</span>
+                          </span>
+                          <span class="wixui-rich-text__text" style="font-size:23px;">
+                            <span class="wixui-rich-text__text" style="letter-spacing:normal">would recommend!"</span>
+                          </span>
+                        </blockquote>
+                      </div>
+
+                      <div class="comp-lbvapoyl aVng1S wixui-horizontal-line" id="comp-lbvapoyl"></div>
+
+                      <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lbvapoym3 wixui-rich-text" data-testid="richTextElement" id="comp-lbvapoym3">
+                        <p class="font_5 wixui-rich-text__text" style="font-size:17px; line-height:normal;">
+                          <span class="wixui-rich-text__text" style="font-size:17px;">
+                            <span class="wixui-rich-text__text" style="font-family:wfont_0b678c_d87218317904465c93d13848ee71a208,wf_d87218317904465c93d13848e,orig_argentum_sans_light;">
+                              <span class="wixui-rich-text__text" style="letter-spacing:normal">- Spicy Lillian</span>
+                            </span>
+                          </span>
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+                </div> <!-- /comp-lbvapoyi -->
+
+              </div>
+            </div>
+          </div>
+
+          <nav aria-label="Slides" class="lZ5yqT">
+            <ol class="dZxZOk">
+              <li aria-current="true">
+                <a aria-label="Molly Mckayy" class="ZVUGJp Ale4Rm" href="#comp-lbvapoy71"></a>
+              </li>
+              <li>
+                <a aria-label="Danura" class="ZVUGJp" href="#comp-lkgx6vam"></a>
+              </li>
+            </ol>
+          </nav>
+        </div> <!-- /slideshow -->
+      </div> <!-- /mesh-container-content -->
+    </div> <!-- /inline-content -->
+</section>
+
+<style>
+/* Solo el título agregado arriba; no modifica nada más */
+#comp-lbvapov8 .ocs-title-standalone{
+  font-family: "Cabinet Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.1;
+  color: #0F0F0F;
+  text-align: center;
+  margin: 0 auto 28px auto; /* separación con el slider */
+  display: block;
+}
+</style>
+
               <section class="Oqnisf comp-lcpc7bki wixui-section" data-block-level-container="ClassicSection" id="comp-lcpc7bki" tabindex="-1">
                <div class="MW5IWV" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lcpc7bki" id="bgLayers_comp-lcpc7bki">
                 <div class="LWbAav Kv1aVt" data-testid="colorUnderlay">
