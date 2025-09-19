@@ -145,217 +145,6 @@
 <style data-href="https://static.parastorage.com/services/wix-thunderbolt/dist/Repeater_FixedColumns.3e2ab597.chunk.min.css">.hRdzm4{direction:var(--direction);display:flex;flex-wrap:wrap;justify-content:var(--justify-content);margin-bottom:var(--margin-bottom);margin-top:var(--margin-top);margin-inline-end:var(--margin-inline-end);margin-inline-start:var(--margin-inline-start);position:relative}.T7n0L6{direction:ltr;margin:var(--item-margin)}.E6jjcn,.cGWabE{display:flex;flex-direction:column}.E6jjcn{direction:var(--direction);justify-content:var(--justify-content);margin-bottom:var(--margin-bottom);margin-top:var(--margin-top);margin-inline-end:var(--margin-inline-end);margin-inline-start:var(--margin-inline-start);position:relative}.aT7wGr>*{width:100%}.VM7gjN{display:flex;justify-content:space-between}.aT7wGr{direction:ltr;margin:var(--item-margin)}</style>
 <style data-href="https://static.parastorage.com/services/wix-thunderbolt/dist/group_7.bae0ce0c.chunk.min.css">.TWFxr5{height:auto!important}.May50y{overflow:hidden!important}</style>
 <title>Acerca de | Agencia Sparta Laxion</title>
-  <style>
-    :root{
-      --header-bg: #ffffff;
-      --text: #0f0f0f;
-      --muted: #bcbcbc;
-      --underline: #e5e5e5;
-      --shadow: 0 1px 0 rgba(0,0,0,.06);
-      --topbar: #2b2b2b;
-    }
-
-    /* ----- Reset básico ----- */
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    img{display:block;max-width:100%;height:auto}
-
-    /* ----- Header ----- */
-    .site-header{
-      position:sticky;top:0;z-index:1000;
-      background:var(--header-bg);
-      box-shadow:var(--shadow);
-      border-top:4px solid var(--topbar);
-      opacity:0; transform:translateY(-8px);
-      animation:fadeDown .45s ease-out forwards;
-    }
-    @keyframes fadeDown{
-      to{opacity:1; transform:translateY(0)}
-    }
-    @media (prefers-reduced-motion: reduce){
-      .site-header{animation:none;opacity:1;transform:none}
-    }
-
-    .container{
-      max-width:1200px;
-      margin:0 auto;
-      padding:14px 24px;
-      display:grid;
-      grid-template-columns:auto 1fr auto;
-      align-items:center;
-      gap:16px;
-    }
-
-    /* ----- Brand (logo + texto) ----- */
-   /* --- Logo --- */
-.brand{
-  display:inline-flex; align-items:center; gap:12px;
-  text-decoration:none; color:var(--text);
-  white-space:nowrap;
-}
-
-/* Mantener proporción, sin recortes, nítido y alineado */
-.brand img.brand-logo{
-  height: clamp(28px, 5vw, 44px); /* tamaño fluido */
-  width: auto;                   /* mantiene proporción */
-  object-fit: contain;           /* NO recortar */
-  display:block;
-  /* border-radius:50%;  <- solo actívalo si tu logo es circular */
-}
-
-/* (opcional) en pantallas pequeñas, bájalo un poco más */
-@media (max-width: 900px){
-  .brand img.brand-logo{ height: 32px; }
-}
-
-    .brand img{width:42px;height:42px;border-radius:999px;object-fit:cover}
-    .brand span{
-      font-family: "Georgia", "Times New Roman", serif;
-      letter-spacing:.12em;
-      font-size:18px;
-    }
-
-    /* ----- Navegación ----- */
-    .main-nav ul{
-      list-style:none;
-      margin:0; padding:0;
-      display:flex; justify-content:center; gap:32px;
-    }
-    .main-nav a{
-      position:relative;
-      display:inline-block;
-      padding:8px 2px;
-      text-decoration:none;
-      color:var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      font-size:16px;
-      transition:color .2s ease;
-    }
-    .main-nav a::after{
-      content:"";
-      position:absolute; left:50%; bottom:-12px;
-      width:0; height:2px; background:var(--underline);
-      transform:translateX(-50%);
-      transition:width .2s ease;
-    }
-    .main-nav a:hover{color:#000}
-    .main-nav a:hover::after{width:100%}
-
-    /* Estado activo como en la captura (texto gris y subrayado corto) */
-    .main-nav a[aria-current="page"]{
-      color:var(--muted);
-    }
-    .main-nav a[aria-current="page"]::after{
-      width:42px;
-    }
-
-    /* ----- Redes ----- */
-    .social{display:flex; align-items:center; gap:18px; justify-self:end}
-    .social a{
-      display:inline-grid; place-items:center;
-      width:28px; height:28px;
-      color:#000; text-decoration:none;
-      transition:transform .15s ease;
-    }
-    .social a:hover{transform:scale(1.06)}
-
-    /* ----- Toggle (mobile) ----- */
-    .nav-toggle{
-      display:none;
-      width:40px;height:40px;
-      border:0;background:transparent;padding:6px;margin-left:auto;
-      border-radius:8px; cursor:pointer;
-    }
-    .nav-toggle:focus-visible{outline:2px solid #000; outline-offset:2px}
-    .nav-toggle span{
-      display:block;height:2px;margin:6px 0;background:#000
-    }
-
-    /* ----- Responsive ----- */
-    @media (max-width: 900px){
-      .container{
-        grid-template-columns:auto auto auto;
-      }
-      .nav-toggle{display:block}
-      .main-nav{
-        position:fixed; top:56px; left:0; right:0;
-        background:var(--header-bg);
-        box-shadow:var(--shadow);
-        border-top:1px solid #eee;
-        transform:translateY(-8px);
-        opacity:0; pointer-events:none;
-        transition:opacity .2s ease, transform .2s ease;
-      }
-      .main-nav ul{
-        flex-direction:column; gap:0; padding:6px 16px;
-      }
-      .main-nav li{border-bottom:1px solid #f2f2f2}
-      .main-nav a{display:block; padding:14px 4px}
-      .main-nav a::after{bottom:0}
-      .social{justify-self:center}
-      .site-header.open .main-nav{
-        opacity:1; transform:none; pointer-events:auto;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header class="site-header" role="banner">
-    <div class="container">
-    <a class="brand" href="https://www.spartalaxion.com/" aria-label="Inicio">
-  <img
-    class="brand-logo"
-    src="logo.png"
-    srcset="logo.png 1x, logo@2x.png 2x"  
-    alt="Sparta Laxion"
-  >
-</a>
-
-      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="https://www.spartalaxion.com/" >Inicio</a></li>
-          <li><a href="https://www.spartalaxion.com/about" aria-current="page">Acerca de</a></li>
-          <li><a href="https://www.spartalaxion.com/creators">Fotografía y Producción</a></li>
-          <li><a href="https://www.spartalaxion.com/faq">FAQ</a></li>
-          <li><a href="https://www.spartalaxion.com/contact">Contacto</a></li>
-        </ul>
-      </nav>
-
-      <div class="social" aria-label="Redes sociales">
-        <a href="https://www.instagram.com/agencialaxion" target="_blank" rel="noopener" aria-label="Instagram">
-          <img alt="Instagram" width="22" height="22"
-               src="https://api.iconify.design/simple-icons/instagram.svg?color=%23000000" />
-        </a>
-        <a href="https://www.tiktok.com/agenciaspartalaxion" target="_blank" rel="noopener" aria-label="TikTok">
-          <img alt="TikTok" width="22" height="22"
-               src="https://api.iconify.design/simple-icons/tiktok.svg?color=%23000000" />
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <script>
-    // Abrir/cerrar menú en mobile
-    const header = document.querySelector('.site-header');
-    const toggle = document.querySelector('.nav-toggle');
-    toggle?.addEventListener('click', () => {
-      const open = header.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    // Marca automáticamente como activo el enlace que coincide con la URL actual (opcional)
-    (function markActive(){
-      const here = location.pathname.replace(/\/+$/,'');
-      document.querySelectorAll('.main-nav a').forEach(a=>{
-        const path = new URL(a.href).pathname.replace(/\/+$/,'');
-        if(path === here){ a.setAttribute('aria-current','page'); }
-      });
-    })();
-  </script>
   <meta name="description" content="Sparta Laxion">
   <link rel="canonical" href="https://www.spartalaxion.com/about">
   <meta property="og:title" content="About | Sparta Laxion">
@@ -628,7 +417,221 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
     <svg data-dom-store="" style="display:none"><defs id="dom-store-defs"></defs></svg>
     
 
-<div id="SITE_CONTAINER"><div id="main_MF" class="main_MF"><div id="SCROLL_TO_TOP" class="Vd6aQZ ignore-focus SCROLL_TO_TOP" role="region" tabindex="-1" aria-label="parte superior de la página"><span class="mHZSwn"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">parte superior de la página</font></font></span></div><button id="SKIP_TO_CONTENT_BTN" class="SKIP_TO_CONTENT_BTN LHrbPP has-custom-focus" tabindex="0"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Saltar al contenido principal</font></font></button><div id="BACKGROUND_GROUP" class="backgroundGroup_umty3 BACKGROUND_GROUP"><div id="BACKGROUND_GROUP_TRANSITION_GROUP"><div id="pageBackground_umty3" data-media-height-override-type="" data-media-position-override="false" class="pageBackground_umty3 BmZ5pC"><div id="bgLayers_pageBackground_umty3" data-hook="bgLayers" data-motion-part="BG_LAYER pageBackground_umty3" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_pageBackground_umty3" data-motion-part="BG_MEDIA pageBackground_umty3" class="VgO9Yg"></div><div data-testid="bgOverlay" class="m4khSP"></div></div></div></div></div><div id="site-root" class="site-root"><div id="masterPage" class="mesh-layout masterPage css-editing-scope"><header id="SITE_HEADER" class="xU8fqS hFwGTD l4oO6c SITE_HEADER wixui-header" tabindex="-1"><div class="_C0cVf"><div class="_4XcTfy" data-testid="screenWidthContainerBg"></div></div><div class="G5K6X8"><div class="gUbusX" data-testid="screenWidthContainerBgCenter"></div></div><div class="CJF7A2"><div data-mesh-id="SITE_HEADERinlineContent" data-testid="inline-content" class=""><div data-mesh-id="SITE_HEADERinlineContent-gridContainer" data-testid="mesh-container-content"><section id="comp-laimmes5" class="comp-laimmes5 CohWsy wixui-column-strip"><div id="bgLayers_comp-laimmes5" data-hook="bgLayers" data-motion-part="BG_LAYER comp-laimmes5" class="if7Vw2"><div data-testid="colorUnderlay" class="tcElKx i1tH8h"></div><div id="bgMedia_comp-laimmes5" data-motion-part="BG_MEDIA comp-laimmes5" class="wG8dni"></div></div><div data-testid="columns" class="V5AUxf"><div id="comp-laimmet4" class="comp-laimmet4 YzqVVZ wixui-column-strip__column"><div id="bgLayers_comp-laimmet4" data-hook="bgLayers" data-motion-part="BG_LAYER comp-laimmet4" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_comp-laimmet4" data-motion-part="BG_MEDIA comp-laimmet4" class="VgO9Yg"></div></div><div data-mesh-id="comp-laimmet4inlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-laimmet4inlineContent-gridContainer" data-testid="mesh-container-content"><div id="comp-laiqlf94" class="MazNVa comp-laiqlf94 wixui-image rYiAuL"><a data-testid="linkElement" href="https://www.spartalaxion.com/" target="_self" class="j7pOnl"><img fetchpriority="high" sizes="185px" srcset="https://static.wixstatic.com/media/7436c1_caf378d3e586450a883de07ee131c669~mv2.png/v1/crop/x_157,y_454,w_784,h_178/fill/w_185,h_42,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Black.png 1x, https://static.wixstatic.com/media/7436c1_caf378d3e586450a883de07ee131c669~mv2.png/v1/crop/x_157,y_454,w_784,h_178/fill/w_370,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Black.png 2x" id="img_comp-laiqlf94" src="./Acerca de _ Agencia Surging_files/Black.png" alt="Negro.png" style="object-fit:cover" class="BI8PVQ Tj01hh" width="185" height="42"></a></div></div></div></div><div id="comp-laimndze" class="comp-laimndze YzqVVZ wixui-column-strip__column"><div id="bgLayers_comp-laimndze" data-hook="bgLayers" data-motion-part="BG_LAYER comp-laimndze" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_comp-laimndze" data-motion-part="BG_MEDIA comp-laimndze" class="VgO9Yg"></div></div><div data-mesh-id="comp-laimndzeinlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-laimndzeinlineContent-gridContainer" data-testid="mesh-container-content"><div id="comp-laiqnl22" class="comp-laiqnl22 NZHLsZ mfxFLH"></div></div></div></div><div id="comp-lcfk3pis" class="comp-lcfk3pis YzqVVZ wixui-column-strip__column"><div id="bgLayers_comp-lcfk3pis" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lcfk3pis" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_comp-lcfk3pis" data-motion-part="BG_MEDIA comp-lcfk3pis" class="VgO9Yg"></div></div><div data-mesh-id="comp-lcfk3pisinlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-lcfk3pisinlineContent-gridContainer" data-testid="mesh-container-content"><div id="comp-lcfk3pnr" class="comp-lcfk3pnr WzbAF8"><ul class="mpGTIt" aria-label="Barra social"><li id="dataItem-lcfk3pnu1-comp-lcfk3pnr" class="O6KwRn"><a data-testid="linkElement" href="https://www.instagram.com/spartalaxion/" target="_blank" rel="noreferrer noopener" class="oRtuWN" aria-label="Instagram       "><img sizes="undefinedpx" srcset="https://static.wixstatic.com/media/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png/v1/fill/w_25,h_25,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png 1x, https://static.wixstatic.com/media/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png/v1/fill/w_50,h_50,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png 2x" id="img_0_comp-lcfk3pnr" src="./Acerca de _ Agencia Surging_files/11062b_ca1d837ce7194421b781ee7384061a8e~mv2.png" alt="Instagram       " style="object-fit:cover" class="YaS0jR Tj01hh"></a></li><li id="dataItem-lcfk3pnu2-comp-lcfk3pnr" class="O6KwRn"><a data-testid="linkElement" href="https://www.linkedin.com/in/surging-agency-42411225b" target="_blank" rel="noreferrer noopener" class="oRtuWN" aria-label="LinkedIn"><img sizes="undefinedpx" srcset="https://static.wixstatic.com/media/11062b_72c275822d4344358ee379f14e7e115f~mv2.png/v1/fill/w_25,h_25,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_72c275822d4344358ee379f14e7e115f~mv2.png 1x, https://static.wixstatic.com/media/11062b_72c275822d4344358ee379f14e7e115f~mv2.png/v1/fill/w_50,h_50,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_72c275822d4344358ee379f14e7e115f~mv2.png 2x" id="img_1_comp-lcfk3pnr" src="./Acerca de _ Agencia Surging_files/11062b_72c275822d4344358ee379f14e7e115f~mv2.png" alt="LinkedIn" style="object-fit:cover" class="YaS0jR Tj01hh"></a></li></ul></div></div></div></div></div></section></div></div></div></div></header><main id="PAGES_CONTAINER" class="PAGES_CONTAINER" tabindex="-1" data-main-content="true"><div id="SITE_PAGES" class="JsJXaX SITE_PAGES"><div id="SITE_PAGES_TRANSITION_GROUP" class="AnQkDU"><div id="umty3" class="dBAkHi umty3"><div class="PFkO7r wixui-page" data-testid="page-bg"></div><div class="HT5ybB"><div id="Containerumty3" class="Containerumty3 SPY_vo"><div data-mesh-id="Containerumty3inlineContent" data-testid="inline-content" class=""><div data-mesh-id="Containerumty3inlineContent-gridContainer" data-testid="mesh-container-content"><section id="comp-lc7s65ga" tabindex="-1" class="Oqnisf comp-lc7s65ga wixui-section" data-block-level-container="ClassicSection" aria-label="contenido principal"><div id="bgLayers_comp-lc7s65ga" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lc7s65ga" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_comp-lc7s65ga" data-motion-part="BG_MEDIA comp-lc7s65ga" class="VgO9Yg"></div></div><div data-mesh-id="comp-lc7s65gainlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-lc7s65gainlineContent-gridContainer" data-testid="mesh-container-content"><div id="comp-lc7s8h9c" class="MazNVa comp-lc7s8h9c wixui-image" data-motion-enter="done"><div data-testid="linkElement" class="j7pOnl"><img fetchpriority="high" sizes="472px" srcset="https://static.wixstatic.com/media/7436c1_eb0ccf0b388b4b2e8d63326e65a14ad0~mv2.jpg/v1/crop/x_0,y_665,w_4480,h_6055/fill/w_472,h_638,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/model13.jpg 1x, https://static.wixstatic.com/media/7436c1_eb0ccf0b388b4b2e8d63326e65a14ad0~mv2.jpg/v1/crop/x_0,y_665,w_4480,h_6055/fill/w_944,h_1276,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/model13.jpg 2x" id="img_comp-lc7s8h9c" src="./Acerca de _ Agencia Surging_files/model13.jpg" alt="modelo13.jpg" style="object-fit:cover" class="BI8PVQ Tj01hh" width="472" height="638"></div></div><div id="comp-lc7s8h9j" class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lc7s8h9j wixui-rich-text" data-testid="richTextElement" data-motion-enter="done"><h1 class="font_0 wixui-rich-text__text" style="font-size:70px; line-height:normal;"><span style="color:rgb(15, 15, 15);" class="wixui-rich-text__text"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Sobre nosotros</font></font></span></h1></div><div id="comp-lc7s8h9q" class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lc7s8h9q wixui-rich-text" data-testid="richTextElement" data-motion-enter="done"><p class="font_8 wixui-rich-text__text" style="font-size:28px; line-height:1.5em;"><span style="font-family:wfont_9ae098_df6394d22ccb4ede9897b4583a6b28a7,wf_df6394d22ccb4ede9897b4583,orig_argentum_sans_regular;" class="wixui-rich-text__text"><span style="font-size:28px;" class="wixui-rich-text__text"><span style="color:#0F0F0F;" class="wixui-rich-text__text"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Agencia de Gestión, garantizando el 1% superior y</font></font></span></span></span></span></p>
+<div id="SITE_CONTAINER"><div id="main_MF" class="main_MF"><div id="SCROLL_TO_TOP" class="Vd6aQZ ignore-focus SCROLL_TO_TOP" role="region" tabindex="-1" aria-label="parte superior de la página"><span class="mHZSwn"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">parte superior de la página</font></font></span></div><button id="SKIP_TO_CONTENT_BTN" class="SKIP_TO_CONTENT_BTN LHrbPP has-custom-focus" tabindex="0"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Saltar al contenido principal</font></font></button><div id="BACKGROUND_GROUP" class="backgroundGroup_umty3 BACKGROUND_GROUP"><div id="BACKGROUND_GROUP_TRANSITION_GROUP"><div id="pageBackground_umty3" data-media-height-override-type="" data-media-position-override="false" class="pageBackground_umty3 BmZ5pC"><div id="bgLayers_pageBackground_umty3" data-hook="bgLayers" data-motion-part="BG_LAYER pageBackground_umty3" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_pageBackground_umty3" data-motion-part="BG_MEDIA pageBackground_umty3" class="VgO9Yg"></div><div data-testid="bgOverlay" class="m4khSP"></div></div></div></div></div><div id="site-root" class="site-root"><div id="masterPage" class="mesh-layout masterPage css-editing-scope">
+  <style>
+    :root{
+      --header-bg: #ffffff;
+      --text: #0f0f0f;
+      --muted: #bcbcbc;
+      --underline: #e5e5e5;
+      --shadow: 0 1px 0 rgba(0,0,0,.06);
+      --topbar: #2b2b2b;
+    }
+
+    /* ----- Reset básico ----- */
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    img{display:block;max-width:100%;height:auto}
+
+    /* ----- Header ----- */
+    .site-header{
+      position:sticky;top:0;z-index:1000;
+      background:var(--header-bg);
+      box-shadow:var(--shadow);
+      border-top:4px solid var(--topbar);
+      opacity:0; transform:translateY(-8px);
+      animation:fadeDown .45s ease-out forwards;
+    }
+    @keyframes fadeDown{
+      to{opacity:1; transform:translateY(0)}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .site-header{animation:none;opacity:1;transform:none}
+    }
+
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 24px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:16px;
+    }
+
+    /* ----- Brand (logo + texto) ----- */
+   /* --- Logo --- */
+.brand{
+  display:inline-flex; align-items:center; gap:12px;
+  text-decoration:none; color:var(--text);
+  white-space:nowrap;
+}
+
+/* Mantener proporción, sin recortes, nítido y alineado */
+.brand img.brand-logo{
+  height: clamp(28px, 5vw, 44px); /* tamaño fluido */
+  width: auto;                   /* mantiene proporción */
+  object-fit: contain;           /* NO recortar */
+  display:block;
+  /* border-radius:50%;  <- solo actívalo si tu logo es circular */
+}
+
+/* (opcional) en pantallas pequeñas, bájalo un poco más */
+@media (max-width: 900px){
+  .brand img.brand-logo{ height: 32px; }
+}
+
+    .brand img{width:42px;height:42px;border-radius:999px;object-fit:cover}
+    .brand span{
+      font-family: "Georgia", "Times New Roman", serif;
+      letter-spacing:.12em;
+      font-size:18px;
+    }
+
+    /* ----- Navegación ----- */
+    .main-nav ul{
+      list-style:none;
+      margin:0; padding:0;
+      display:flex; justify-content:center; gap:32px;
+    }
+    .main-nav a{
+      position:relative;
+      display:inline-block;
+      padding:8px 2px;
+      text-decoration:none;
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-size:16px;
+      transition:color .2s ease;
+    }
+    .main-nav a::after{
+      content:"";
+      position:absolute; left:50%; bottom:-12px;
+      width:0; height:2px; background:var(--underline);
+      transform:translateX(-50%);
+      transition:width .2s ease;
+    }
+    .main-nav a:hover{color:#000}
+    .main-nav a:hover::after{width:100%}
+
+    /* Estado activo como en la captura (texto gris y subrayado corto) */
+    .main-nav a[aria-current="page"]{
+      color:var(--muted);
+    }
+    .main-nav a[aria-current="page"]::after{
+      width:42px;
+    }
+
+    /* ----- Redes ----- */
+    .social{display:flex; align-items:center; gap:18px; justify-self:end}
+    .social a{
+      display:inline-grid; place-items:center;
+      width:28px; height:28px;
+      color:#000; text-decoration:none;
+      transition:transform .15s ease;
+    }
+    .social a:hover{transform:scale(1.06)}
+
+    /* ----- Toggle (mobile) ----- */
+    .nav-toggle{
+      display:none;
+      width:40px;height:40px;
+      border:0;background:transparent;padding:6px;margin-left:auto;
+      border-radius:8px; cursor:pointer;
+    }
+    .nav-toggle:focus-visible{outline:2px solid #000; outline-offset:2px}
+    .nav-toggle span{
+      display:block;height:2px;margin:6px 0;background:#000
+    }
+
+    /* ----- Responsive ----- */
+    @media (max-width: 900px){
+      .container{
+        grid-template-columns:auto auto auto;
+      }
+      .nav-toggle{display:block}
+      .main-nav{
+        position:fixed; top:56px; left:0; right:0;
+        background:var(--header-bg);
+        box-shadow:var(--shadow);
+        border-top:1px solid #eee;
+        transform:translateY(-8px);
+        opacity:0; pointer-events:none;
+        transition:opacity .2s ease, transform .2s ease;
+      }
+      .main-nav ul{
+        flex-direction:column; gap:0; padding:6px 16px;
+      }
+      .main-nav li{border-bottom:1px solid #f2f2f2}
+      .main-nav a{display:block; padding:14px 4px}
+      .main-nav a::after{bottom:0}
+      .social{justify-self:center}
+      .site-header.open .main-nav{
+        opacity:1; transform:none; pointer-events:auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container">
+    <a class="brand" href="https://www.spartalaxion.com/" aria-label="Inicio">
+  <img
+    class="brand-logo"
+    src="logo.png"
+    srcset="logo.png 1x, logo@2x.png 2x"  
+    alt="Sparta Laxion"
+  >
+</a>
+
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="https://www.spartalaxion.com/" >Inicio</a></li>
+          <li><a href="https://www.spartalaxion.com/about">Acerca de</a></li>
+          <li><a href="https://www.spartalaxion.com/creators">Fotografía y Producción</a></li>
+          <li><a href="https://www.spartalaxion.com/faq">FAQ</a></li>
+          <li><a href="https://www.spartalaxion.com/contact">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="social" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/agencialaxion" target="_blank" rel="noopener" aria-label="Instagram">
+          <img alt="Instagram" width="22" height="22"
+               src="https://api.iconify.design/simple-icons/instagram.svg?color=%23000000" />
+        </a>
+        <a href="https://www.tiktok.com/agenciaspartalaxion" target="_blank" rel="noopener" aria-label="TikTok">
+          <img alt="TikTok" width="22" height="22"
+               src="https://api.iconify.design/simple-icons/tiktok.svg?color=%23000000" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    // Abrir/cerrar menú en mobile
+    const header = document.querySelector('.site-header');
+    const toggle = document.querySelector('.nav-toggle');
+    toggle?.addEventListener('click', () => {
+      const open = header.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Marca automáticamente como activo el enlace que coincide con la URL actual (opcional)
+    (function markActive(){
+      const here = location.pathname.replace(/\/+$/,'');
+      document.querySelectorAll('.main-nav a').forEach(a=>{
+        const path = new URL(a.href).pathname.replace(/\/+$/,'');
+        if(path === here){ a.setAttribute('aria-current','page'); }
+      });
+    })();
+  </script>  
+  
+  
+  <main id="PAGES_CONTAINER" class="PAGES_CONTAINER" tabindex="-1" data-main-content="true"><div id="SITE_PAGES" class="JsJXaX SITE_PAGES"><div id="SITE_PAGES_TRANSITION_GROUP" class="AnQkDU"><div id="umty3" class="dBAkHi umty3"><div class="PFkO7r wixui-page" data-testid="page-bg"></div><div class="HT5ybB"><div id="Containerumty3" class="Containerumty3 SPY_vo"><div data-mesh-id="Containerumty3inlineContent" data-testid="inline-content" class=""><div data-mesh-id="Containerumty3inlineContent-gridContainer" data-testid="mesh-container-content"><section id="comp-lc7s65ga" tabindex="-1" class="Oqnisf comp-lc7s65ga wixui-section" data-block-level-container="ClassicSection" aria-label="contenido principal"><div id="bgLayers_comp-lc7s65ga" data-hook="bgLayers" data-motion-part="BG_LAYER comp-lc7s65ga" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_comp-lc7s65ga" data-motion-part="BG_MEDIA comp-lc7s65ga" class="VgO9Yg"></div></div><div data-mesh-id="comp-lc7s65gainlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-lc7s65gainlineContent-gridContainer" data-testid="mesh-container-content"><div id="comp-lc7s8h9c" class="MazNVa comp-lc7s8h9c wixui-image" data-motion-enter="done"><div data-testid="linkElement" class="j7pOnl"><img fetchpriority="high" sizes="472px" srcset="https://static.wixstatic.com/media/7436c1_eb0ccf0b388b4b2e8d63326e65a14ad0~mv2.jpg/v1/crop/x_0,y_665,w_4480,h_6055/fill/w_472,h_638,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/model13.jpg 1x, https://static.wixstatic.com/media/7436c1_eb0ccf0b388b4b2e8d63326e65a14ad0~mv2.jpg/v1/crop/x_0,y_665,w_4480,h_6055/fill/w_944,h_1276,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/model13.jpg 2x" id="img_comp-lc7s8h9c" src="./Acerca de _ Agencia Surging_files/model13.jpg" alt="modelo13.jpg" style="object-fit:cover" class="BI8PVQ Tj01hh" width="472" height="638"></div></div><div id="comp-lc7s8h9j" class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lc7s8h9j wixui-rich-text" data-testid="richTextElement" data-motion-enter="done"><h1 class="font_0 wixui-rich-text__text" style="font-size:70px; line-height:normal;"><span style="color:rgb(15, 15, 15);" class="wixui-rich-text__text"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Sobre nosotros</font></font></span></h1></div><div id="comp-lc7s8h9q" class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lc7s8h9q wixui-rich-text" data-testid="richTextElement" data-motion-enter="done"><p class="font_8 wixui-rich-text__text" style="font-size:28px; line-height:1.5em;"><span style="font-family:wfont_9ae098_df6394d22ccb4ede9897b4583a6b28a7,wf_df6394d22ccb4ede9897b4583,orig_argentum_sans_regular;" class="wixui-rich-text__text"><span style="font-size:28px;" class="wixui-rich-text__text"><span style="color:#0F0F0F;" class="wixui-rich-text__text"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Agencia de Gestión, garantizando el 1% superior y</font></font></span></span></span></span></p>
 
 <p class="font_8 wixui-rich-text__text" style="font-size:28px; line-height:1.5em;"><span style="font-family:wfont_9ae098_df6394d22ccb4ede9897b4583a6b28a7,wf_df6394d22ccb4ede9897b4583,orig_argentum_sans_regular;" class="wixui-rich-text__text"><span style="font-size:28px;" class="wixui-rich-text__text"><span style="color:#0F0F0F;" class="wixui-rich-text__text"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">Cobertura de servicio completo.</font></font></span></span></span></span></p></div><div id="comp-lc7s8h9x" class="comp-lc7s8h9x wixui-vector-image" data-motion-enter="done"><div data-testid="svgRoot-comp-lc7s8h9x" class="VDJedC l4CAhn"><!--?xml version="1.0" encoding="UTF-8"?-->
 <svg preserveAspectRatio="xMidYMid meet" data-bbox="20 42.5 160 115" viewBox="20 42.5 160 115" height="200" width="200" xmlns="http://www.w3.org/2000/svg" data-type="color" role="presentation" aria-hidden="true"><defs><style>#comp-lc7s8h9x svg [data-color="1"] {fill: #0F0F0F;}</style></defs>
@@ -1064,21 +1067,7 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
 	}
 </script>
     
-        <script>
-			const wixAdsOffsetHeight = document.getElementById('WIX_ADS')?.offsetHeight || 0;
-			const header = document.getElementsByTagName('header')[0];
-
-			let headerOffsetHeight = 0;
-
-			if (header) {
-				const headerPosition = window.getComputedStyle(header).getPropertyValue('position').toLowerCase();
-				const isHeaderStickyOrFixed = headerPosition === 'sticky' || headerPosition === 'fixed';
-				headerOffsetHeight = isHeaderStickyOrFixed ? header.offsetHeight : 0;
-			}
-
-			document.documentElement.style.scrollPaddingTop = `${wixAdsOffsetHeight + headerOffsetHeight}px`;
-        </script>
-    
+       
 
     
     <script defer="" src="./Acerca de _ Agencia Surging_files/siteTags.bundle.min.js.descarga"></script>
