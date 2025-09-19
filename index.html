@@ -1108,12 +1108,13 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
           </span>
           <span class="inherit-font-size wixui-rich-text__text" style="font-size:100px;"></span>
           <span class="wixui-rich-text__text" style="font-size:40px;">
-            <span class="wixui-rich-text__text" style="letter-spacing:0.05em;">
-              <span class="wixui-rich-text__text" style="font-family:wfont_154d86_bada4698fc7541cd83f44fa646f02978,wf_bada4698fc7541cd83f44fa64,orig_cabinet_grotesk_extrabold;">
-                influencers
-              </span>
-            </span>
-          </span>
+  <span class="wixui-rich-text__text" style="letter-spacing:0.05em;">
+    <span class="wixui-rich-text__text" style="font-family:wfont_154d86_bada4698fc7541cd83f44fa646f02978,wf_bada4698fc7541cd83f44fa64,orig_cabinet_grotesk_extrabold;">
+      <span class="word-ring">influencers</span>
+    </span>
+  </span>
+</span>
+
           <br class="wixui-rich-text__text"/>
           <span class="wixui-rich-text__text" style="font-size:99px;">
             <span class="wixui-rich-text__text" style="letter-spacing:0.05em;">
@@ -1139,7 +1140,17 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
           </span>
         </span>
       </h1>
+      
+<div class="hero-blob">
+  <img
+    src="https://static.wixstatic.com/media/11062b_38a32c2b4a7c494fb4ccd074a08e252af000.png"
+    alt="Forma iridiscente"
+    loading="eager"
+    decoding="async"
+  />
+</div>
     </div>
+    
 
     <div class="Z_l5lU ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-lcddj75k wixui-rich-text" data-motion-enter="done" data-testid="richTextElement" id="comp-lcddj75k">
       <p class="font_2 wixui-rich-text__text" style="font-size:30px; line-height:1.3em;">
@@ -1169,6 +1180,209 @@ url("https://static.wixstatic.com/ufonts/9ae098_7c1a8ef358444191a61b69d5cf161ad1
     </div>
   </div>
 </div>
+
+<!-- …tus divs de texto… -->
+
+
+<style>
+/* ===== Variable: eje izquierdo compartido ===== */
+:root{
+  --hero-left-pad: clamp(0px, 0.6vw, 12px); /* ajusta si quieres aún más a la izq. */
+}
+
+/* ===== HERO: contenedor principal centrado (desktop) ===== */
+[data-mesh-id="comp-lcddj731inlineContent"] >
+[data-mesh-id="comp-lcddj731inlineContent-gridContainer"]{
+  max-width: min(1280px, 92vw);
+  margin-inline: auto;
+  padding-inline: clamp(32px, 6vw, 80px);
+  min-height: min(88vh, 980px);
+  display: block; /* la burbuja va absoluta dentro del título */
+}
+
+/* ===== Título superior grande (“CREAMOS / SOBRESALIENTES”) ===== */
+#comp-lcde2yhg{
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-left: var(--hero-left-pad); /* mismo eje que el resto */
+}
+
+/* ===== Bloque Título + Burbuja (desktop) ===== */
+#comp-lcddj75g1{
+  position: relative;
+  max-width: 1200px;
+  margin-inline: auto;
+  overflow: visible;
+
+  /* pegué el bloque al lado izquierdo del contenedor */
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: clamp(32px, 6vw, 80px);
+}
+
+#comp-lcddj75g1 > h1{
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding-left: 0; /* ya damos padding en el padre */
+  text-align: left;
+
+  /* ancho y gutter para separar del blob */
+  max-width: clamp(520px, 44vw, 660px);
+  padding-right: clamp(16px, 4vw, 80px);
+  line-height: 1.06;
+}
+
+/* Burbuja a la derecha, sin empujar el layout */
+#comp-lcddj75g1 .hero-blob{
+  position: absolute;
+  top: 50%;
+  right: -20vw;                 /* más negativo = más a la derecha */
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+#comp-lcddj75g1 .hero-blob img{
+  width: clamp(320px, 32vw, 500px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 28px rgba(0,0,0,.18));
+}
+
+/* ===== Párrafo y botón en el mismo eje ===== */
+#comp-lcddj75k,
+#comp-lcgb5gv6{
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+#comp-lcddj75k{
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: clamp(32px, 6vw, 80px);
+}
+#comp-lcddj75k p{
+  margin-left: 0;
+  max-width: clamp(520px, 44vw, 660px);
+  margin-top: clamp(8px, 1.2vw, 16px);
+  padding-left: 0; /* seguimos el eje del padre */
+}
+
+/* ===== Ultra-wide ===== */
+@media (min-width: 1400px){
+  [data-mesh-id="comp-lcddj731inlineContent"] >
+  [data-mesh-id="comp-lcddj731inlineContent-gridContainer"]{
+    max-width: 1320px;
+  }
+  #comp-lcddj75g1 .hero-blob{ right: -22vw; } /* más separación en pantallas grandes */
+}
+
+/* ===== Ajuste intermedio ===== */
+@media (max-width: 1200px){
+  #comp-lcddj75g1 > h1,
+  #comp-lcddj75k p{
+    max-width: clamp(500px, 52vw, 620px);
+  }
+  #comp-lcddj75g1 .hero-blob{ right: -14vw; }
+}
+
+/* ===== Móvil (≤900px): apilar, texto izq., burbuja debajo centrada ===== */
+@media (max-width: 900px){
+  :root{ --m-pad: clamp(16px, 5vw, 28px); }
+
+  [data-mesh-id="comp-lcddj731inlineContent"] >
+  [data-mesh-id="comp-lcddj731inlineContent-gridContainer"]{
+    padding-inline: var(--m-pad);
+  }
+
+  #comp-lcddj75g1{
+    display: block;
+    padding-left: var(--m-pad);
+    padding-right: var(--m-pad);
+  }
+  #comp-lcddj75g1 > h1{
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    line-height: 1.08;
+  }
+
+  #comp-lcddj75g1 .hero-blob{
+    position: static;
+    right: auto; top: auto;
+    transform: none;
+    margin: clamp(12px, 4vw, 20px) auto 0;
+    justify-self: center;
+  }
+  #comp-lcddj75g1 .hero-blob img{
+    width: min(68vw, 360px); /* tamaño cómodo en teléfonos */
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,.14));
+  }
+
+  #comp-lcddj75k{
+    padding-left: var(--m-pad);
+    padding-right: var(--m-pad);
+  }
+  #comp-lcddj75k p{
+    max-width: none;
+    text-align: left;
+    margin-top: clamp(10px, 2.4vw, 16px);
+  }
+
+  #comp-lcgb5gv6{
+    padding-left: var(--m-pad);
+    padding-right: var(--m-pad);
+    margin-top: clamp(12px, 3vw, 18px);
+  }
+}
+
+
+/* ===== Aro centrado detrás de la palabra ===== */
+.word-ring{
+  position: relative;
+  display: inline-block;
+  isolation: isolate;         /* crea su propio stacking context */
+  z-index: 0;                 /* el texto queda arriba del aro */
+  padding-inline: .06em;      /* micro aire lateral */
+}
+
+/* El aro va centrado al 50% x 50% del span */
+.word-ring::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  width: 13.6em;               /* tamaño base del aro (grande y visible) */
+  height: 10.6em;
+  transform: translate(-50%, -60%) rotate(-4deg);
+  background: url("https://static.wixstatic.com/media/11062b_b50e015f54d04facaa4635d88e21736af000.png")
+              no-repeat center / contain;
+  z-index: -1;                /* por detrás del texto, dentro del span */
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.15));
+  opacity: 1;
+}
+
+/* Pantallas muy anchas: un toque más grande y un pelín más arriba */
+@media (min-width: 1400px){
+  .word-ring::before{
+     width: 13.6em;               /* tamaño base del aro (grande y visible) */
+  height: 10.6em;
+    transform: translate(-50%, -64%) rotate(-4deg);
+  }
+}
+
+/* Móvil: más contenido para no tapar */
+@media (max-width: 900px){
+  .word-ring::before{
+    width: 2.4em;
+    height: 2.4em;
+    transform: translate(-50%, -58%) rotate(-4deg);
+  }
+}
+
+</style>
 
 <!-- ====== Script para autoplay/pausa y fallback (pegar una sola vez) ====== -->
 <script>
