@@ -314,7 +314,7 @@ flexibility(document.documentElement);
 		Skip to content</font></font></a>
 
 <div class="hfeed site" id="page">
-			 <style>
+ <style>
     :root{
       --header-bg: #ffffff;
       --text: #0f0f0f;
@@ -337,10 +337,9 @@ flexibility(document.documentElement);
       border-top:4px solid var(--topbar);
       opacity:0; transform:translateY(-8px);
       animation:fadeDown .45s ease-out forwards;
+      overflow:visible; /* evita recortes del logo en móvil */
     }
-    @keyframes fadeDown{
-      to{opacity:1; transform:translateY(0)}
-    }
+    @keyframes fadeDown{ to{opacity:1; transform:translateY(0)} }
     @media (prefers-reduced-motion: reduce){
       .site-header{animation:none;opacity:1;transform:none}
     }
@@ -356,28 +355,27 @@ flexibility(document.documentElement);
     }
 
     /* ----- Brand (logo + texto) ----- */
-   /* --- Logo --- */
-.brand{
-  display:inline-flex; align-items:center; gap:12px;
-  text-decoration:none; color:var(--text);
-  white-space:nowrap;
-}
+    .brand{
+      display:inline-flex; align-items:center; gap:12px;
+      text-decoration:none; color:var(--text);
+      white-space:nowrap;
+      position:relative; z-index:5; /* encima del menú */
+    }
 
-/* Mantener proporción, sin recortes, nítido y alineado */
-.brand img.brand-logo{
-  height: clamp(28px, 5vw, 44px); /* tamaño fluido */
-  width: auto;                   /* mantiene proporción */
-  object-fit: contain;           /* NO recortar */
-  display:block;
-  /* border-radius:50%;  <- solo actívalo si tu logo es circular */
-}
+    /* Logo: tamaño fluido y sin recortes */
+    .brand img.brand-logo{
+      height: clamp(28px, 5vw, 44px) !important;
+      width: auto !important;
+      object-fit: contain !important;
+      display: block;
+    }
 
-/* (opcional) en pantallas pequeñas, bájalo un poco más */
-@media (max-width: 900px){
-  .brand img.brand-logo{ height: 32px; }
-}
+    /* (opcional) en pantallas medianas, un poco más compacto */
+    @media (max-width: 900px){
+      .brand img.brand-logo{ height: 32px !important; }
+    }
 
-    .brand img{width:42px;height:42px;border-radius:999px;object-fit:cover}
+    /* TÍTULO de marca si lo usas */
     .brand span{
       font-family: "Georgia", "Times New Roman", serif;
       letter-spacing:.12em;
@@ -409,14 +407,8 @@ flexibility(document.documentElement);
     }
     .main-nav a:hover{color:#000}
     .main-nav a:hover::after{width:100%}
-
-    /* Estado activo como en la captura (texto gris y subrayado corto) */
-    .main-nav a[aria-current="page"]{
-      color:var(--muted);
-    }
-    .main-nav a[aria-current="page"]::after{
-      width:42px;
-    }
+    .main-nav a[aria-current="page"]{ color:var(--muted); }
+    .main-nav a[aria-current="page"]::after{ width:42px; }
 
     /* ----- Redes ----- */
     .social{display:flex; align-items:center; gap:18px; justify-self:end}
@@ -442,10 +434,8 @@ flexibility(document.documentElement);
 
     /* ----- Responsive ----- */
     @media (max-width: 900px){
-      .container{
-        grid-template-columns:auto auto auto;
-      }
-      .nav-toggle{display:block}
+      .container{ grid-template-columns:auto auto auto; }
+      .nav-toggle{ display:block; }
       .main-nav{
         position:fixed; top:56px; left:0; right:0;
         background:var(--header-bg);
@@ -455,30 +445,26 @@ flexibility(document.documentElement);
         opacity:0; pointer-events:none;
         transition:opacity .2s ease, transform .2s ease;
       }
-      .main-nav ul{
-        flex-direction:column; gap:0; padding:6px 16px;
-      }
-      .main-nav li{border-bottom:1px solid #f2f2f2}
-      .main-nav a{display:block; padding:14px 4px}
-      .main-nav a::after{bottom:0}
-      .social{justify-self:center}
-      .site-header.open .main-nav{
-        opacity:1; transform:none; pointer-events:auto;
-      }
+      .main-nav ul{ flex-direction:column; gap:0; padding:6px 16px; }
+      .main-nav li{ border-bottom:1px solid #f2f2f2 }
+      .main-nav a{ display:block; padding:14px 4px }
+      .main-nav a::after{ bottom:0 }
+      .social{ justify-self:center }
+      .site-header.open .main-nav{ opacity:1; transform:none; pointer-events:auto; }
     }
   </style>
 </head>
+
 <body>
-  <header class="site-header" role="banner">
+  <header class="site-header" role="banner" id="SITE_HEADER">
     <div class="container">
-    <a class="brand" href="https://www.spartalaxion.com/" aria-label="Inicio">
-  <img
-    class="brand-logo"
-    src="logo.png"
-    srcset="logo.png 1x, logo@2x.png 2x"  
-    alt="Sparta Laxion"
-  >
-</a>
+      <a class="brand" href="https://www.spartalaxion.com/" aria-label="Inicio">
+        <img
+          class="brand-logo"
+          src="logo.png"      
+          alt="Sparta Laxion"
+        >
+      </a>
 
       <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -486,9 +472,9 @@ flexibility(document.documentElement);
 
       <nav class="main-nav" aria-label="Navegación principal">
         <ul>
-          <li><a href="https://www.spartalaxion.com/" >Inicio</a></li>
-          <li><a href="https://www.spartalaxion.com/about" >Acerca de</a></li>
-          <li><a href="https://www.spartalaxion.com/creators" aria-current="page">Fotografía y Producción</a></li>
+          <li><a href="https://www.spartalaxion.com/">Inicio</a></li>
+          <li><a href="https://www.spartalaxion.com/about">Acerca de</a></li>
+          <li><a href="https://www.spartalaxion.com/creators">Fotografía y Producción</a></li>
           <li><a href="https://www.spartalaxion.com/faq">FAQ</a></li>
           <li><a href="https://www.spartalaxion.com/contact">Contacto</a></li>
         </ul>
@@ -499,7 +485,7 @@ flexibility(document.documentElement);
           <img alt="Instagram" width="22" height="22"
                src="https://api.iconify.design/simple-icons/instagram.svg?color=%23000000" />
         </a>
-        <a href="https://www.tiktok.com/agenciaspartalaxion" target="_blank" rel="noopener" aria-label="TikTok">
+        <a href="https://www.tiktok.com/@agenciaspartalaxion?_t=ZS-8zqW166EGI5&_r=1" target="_blank" rel="noopener" aria-label="TikTok">
           <img alt="TikTok" width="22" height="22"
                src="https://api.iconify.design/simple-icons/tiktok.svg?color=%23000000" />
         </a>
@@ -508,7 +494,6 @@ flexibility(document.documentElement);
   </header>
 
   <script>
-    // Abrir/cerrar menú en mobile
     const header = document.querySelector('.site-header');
     const toggle = document.querySelector('.nav-toggle');
     toggle?.addEventListener('click', () => {
@@ -516,7 +501,6 @@ flexibility(document.documentElement);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
-    // Marca automáticamente como activo el enlace que coincide con la URL actual (opcional)
     (function markActive(){
       const here = location.pathname.replace(/\/+$/,'');
       document.querySelectorAll('.main-nav a').forEach(a=>{
@@ -761,47 +745,9 @@ window.gtranslateSettings = /* document.write */ window.gtranslateSettings || {}
 				
 
 <div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: &#39;Google Sans&#39;, Arial, sans-serif;" data-id=""><div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd"><div class="VIpgJd-yAWNEb-hvhgNd-Ud7fr"><img src="./Home - Francisco Image_files/24px.svg" width="24" height="24" alt=""><div class=" VIpgJd-yAWNEb-hvhgNd-IuizWc-i3jM8c " dir="ltr">Original text</div></div><div class="VIpgJd-yAWNEb-hvhgNd-k77Iif"><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr"><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr"><div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">Rate this translation</div><div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">Your feedback will be used to help improve Google Translate</div></div><div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr"><button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Good translation" aria-label="Good translation" aria-pressed="false"><span id="goog-gt-thumbUpIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span><span id="goog-gt-thumbUpIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg></span></button><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Poor translation" aria-label="Poor translation" aria-pressed="false"><span id="goog-gt-thumbDownIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span><span id="goog-gt-thumbDownIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg></span></button></div></div><div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><form id="goog-gt-votingForm" action="https://translate.googleapis.com/translate_voting?client=te" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang"><input type="text" name="tl" id="goog-gt-votingInputTrgLang"><input type="text" name="query" id="goog-gt-votingInputSrcText"><input type="text" name="gtrans" id="goog-gt-votingInputTrgText"><input type="text" name="vote" id="goog-gt-votingInputVote"></form><iframe name="votingFrame" frameborder="0" src="./Home - Francisco Image_files/saved_resource(1).html"></iframe></div></div></div><script src="./Home - Francisco Image_files/element.js.descarga"></script><div class="VIpgJd-ZVi9od-aZ2wEe-wOHMyf"><div class="VIpgJd-ZVi9od-aZ2wEe-OiiCO"><svg xmlns="http://www.w3.org/2000/svg" class="VIpgJd-ZVi9od-aZ2wEe" width="96px" height="96px" viewBox="0 0 66 66"><circle class="VIpgJd-ZVi9od-aZ2wEe-Jt5cK" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="VIpgJd-ZVi9od-xl07Ob-OEVmcd skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 2579px; height: 263px; display: none;" src="./Home - Francisco Image_files/saved_resource(2).html"></iframe><iframe frameborder="0" class="VIpgJd-ZVi9od-xl07Ob-OEVmcd skiptranslate" title="Language Translate Widget" style="visibility: visible; box-sizing: content-box; width: 197px; height: 69px; display: none;" src="./Home - Francisco Image_files/saved_resource(3).html"></iframe>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- WhatsApp Floating Button -->
-<a
-  href="https://wa.me/528180261147?text=Hola%20vengo%20desde%20la%20web%20de%20SPARTA%20LAXION.%20Quiero%20m%C3%A1s%20informaci%C3%B3n."
-  class="wa-float-btn"
-  target="_blank"
-  rel="noopener"
-  aria-label="Chatear por WhatsApp al +52 1 81 8026 1147"
-  title="¿Hablamos por WhatsApp?"
->
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
 
-<style>
-  .wa-float-btn{
-    position: fixed;
-    right: 18px; bottom: 18px;
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #31e270 0%, #25D366 60%, #1ebe57 100%);
-    display: inline-flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 24px rgba(0,0,0,.22);
-    z-index: 9999; text-decoration: none;
-    transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
-    border: 1px solid rgba(0,0,0,.08);
-  }
-  .wa-float-btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0,0,0,.28); }
-  .wa-float-btn:focus-visible{ outline: 3px solid #93f7b7; outline-offset: 3px; }
-  .wa-float-btn i{ font-size: 28px; color: #fff; line-height: 1; }
 
-  /* pulso muy sutil */
-  .wa-float-btn::after{
-    content:""; position:absolute; inset:0; border-radius:50%;
-    border:2px solid rgba(37,211,102,.35); animation:wa-pulse 2.2s ease-out infinite;
-  }
-  @keyframes wa-pulse{
-    0%{transform:scale(1);opacity:.8} 70%{transform:scale(1.35);opacity:0} 100%{transform:scale(1.35);opacity:0}
-  }
-  @media (max-width:480px){ .wa-float-btn{ right:14px; bottom:14px; width:56px; height:56px; } .wa-float-btn i{ font-size:26px; } }
-</style>
 
 
 </body></html>

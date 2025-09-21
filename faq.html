@@ -390,6 +390,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
     
 
 <div id="SITE_CONTAINER"><div id="main_MF" class="main_MF"><div id="SCROLL_TO_TOP" class="Vd6aQZ ignore-focus SCROLL_TO_TOP" role="region" tabindex="-1" aria-label="top of page"><span class="mHZSwn">top of page</span></div><button id="SKIP_TO_CONTENT_BTN" class="SKIP_TO_CONTENT_BTN LHrbPP has-custom-focus" tabindex="0">Skip to Main Content</button><div id="BACKGROUND_GROUP" class="backgroundGroup_c71yj BACKGROUND_GROUP"><div id="BACKGROUND_GROUP_TRANSITION_GROUP"><div id="pageBackground_c71yj" data-media-height-override-type="" data-media-position-override="false" class="pageBackground_c71yj BmZ5pC"><div id="bgLayers_pageBackground_c71yj" data-hook="bgLayers" data-motion-part="BG_LAYER pageBackground_c71yj" class="MW5IWV"><div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div><div id="bgMedia_pageBackground_c71yj" data-motion-part="BG_MEDIA pageBackground_c71yj" class="VgO9Yg"></div><div data-testid="bgOverlay" class="m4khSP"></div></div></div></div></div><div id="site-root" class="site-root"><div id="masterPage" class="mesh-layout masterPage css-editing-scope"> <style>
+   <style>
     :root{
       --header-bg: #ffffff;
       --text: #0f0f0f;
@@ -412,10 +413,9 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
       border-top:4px solid var(--topbar);
       opacity:0; transform:translateY(-8px);
       animation:fadeDown .45s ease-out forwards;
+      overflow:visible; /* evita recortes del logo en móvil */
     }
-    @keyframes fadeDown{
-      to{opacity:1; transform:translateY(0)}
-    }
+    @keyframes fadeDown{ to{opacity:1; transform:translateY(0)} }
     @media (prefers-reduced-motion: reduce){
       .site-header{animation:none;opacity:1;transform:none}
     }
@@ -431,28 +431,27 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
     }
 
     /* ----- Brand (logo + texto) ----- */
-   /* --- Logo --- */
-.brand{
-  display:inline-flex; align-items:center; gap:12px;
-  text-decoration:none; color:var(--text);
-  white-space:nowrap;
-}
+    .brand{
+      display:inline-flex; align-items:center; gap:12px;
+      text-decoration:none; color:var(--text);
+      white-space:nowrap;
+      position:relative; z-index:5; /* encima del menú */
+    }
 
-/* Mantener proporción, sin recortes, nítido y alineado */
-.brand img.brand-logo{
-  height: clamp(28px, 5vw, 44px); /* tamaño fluido */
-  width: auto;                   /* mantiene proporción */
-  object-fit: contain;           /* NO recortar */
-  display:block;
-  /* border-radius:50%;  <- solo actívalo si tu logo es circular */
-}
+    /* Logo: tamaño fluido y sin recortes */
+    .brand img.brand-logo{
+      height: clamp(28px, 5vw, 44px) !important;
+      width: auto !important;
+      object-fit: contain !important;
+      display: block;
+    }
 
-/* (opcional) en pantallas pequeñas, bájalo un poco más */
-@media (max-width: 900px){
-  .brand img.brand-logo{ height: 32px; }
-}
+    /* (opcional) en pantallas medianas, un poco más compacto */
+    @media (max-width: 900px){
+      .brand img.brand-logo{ height: 32px !important; }
+    }
 
-    .brand img{width:42px;height:42px;border-radius:999px;object-fit:cover}
+    /* TÍTULO de marca si lo usas */
     .brand span{
       font-family: "Georgia", "Times New Roman", serif;
       letter-spacing:.12em;
@@ -484,14 +483,8 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
     }
     .main-nav a:hover{color:#000}
     .main-nav a:hover::after{width:100%}
-
-    /* Estado activo como en la captura (texto gris y subrayado corto) */
-    .main-nav a[aria-current="page"]{
-      color:var(--muted);
-    }
-    .main-nav a[aria-current="page"]::after{
-      width:42px;
-    }
+    .main-nav a[aria-current="page"]{ color:var(--muted); }
+    .main-nav a[aria-current="page"]::after{ width:42px; }
 
     /* ----- Redes ----- */
     .social{display:flex; align-items:center; gap:18px; justify-self:end}
@@ -517,10 +510,8 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
 
     /* ----- Responsive ----- */
     @media (max-width: 900px){
-      .container{
-        grid-template-columns:auto auto auto;
-      }
-      .nav-toggle{display:block}
+      .container{ grid-template-columns:auto auto auto; }
+      .nav-toggle{ display:block; }
       .main-nav{
         position:fixed; top:56px; left:0; right:0;
         background:var(--header-bg);
@@ -530,30 +521,26 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
         opacity:0; pointer-events:none;
         transition:opacity .2s ease, transform .2s ease;
       }
-      .main-nav ul{
-        flex-direction:column; gap:0; padding:6px 16px;
-      }
-      .main-nav li{border-bottom:1px solid #f2f2f2}
-      .main-nav a{display:block; padding:14px 4px}
-      .main-nav a::after{bottom:0}
-      .social{justify-self:center}
-      .site-header.open .main-nav{
-        opacity:1; transform:none; pointer-events:auto;
-      }
+      .main-nav ul{ flex-direction:column; gap:0; padding:6px 16px; }
+      .main-nav li{ border-bottom:1px solid #f2f2f2 }
+      .main-nav a{ display:block; padding:14px 4px }
+      .main-nav a::after{ bottom:0 }
+      .social{ justify-self:center }
+      .site-header.open .main-nav{ opacity:1; transform:none; pointer-events:auto; }
     }
   </style>
 </head>
+
 <body>
-  <header class="site-header" role="banner">
+  <header class="site-header" role="banner" id="SITE_HEADER">
     <div class="container">
-    <a class="brand" href="https://www.spartalaxion.com/" aria-label="Inicio">
-  <img
-    class="brand-logo"
-    src="logo.png"
-    srcset="logo.png 1x, logo@2x.png 2x"  
-    alt="Sparta Laxion"
-  >
-</a>
+      <a class="brand" href="https://www.spartalaxion.com/" aria-label="Inicio">
+        <img
+          class="brand-logo"
+          src="logo.png"      
+          alt="Sparta Laxion"
+        >
+      </a>
 
       <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -561,8 +548,8 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
 
       <nav class="main-nav" aria-label="Navegación principal">
         <ul>
-          <li><a href="https://www.spartalaxion.com/" >Inicio</a></li>
-          <li><a href="https://www.spartalaxion.com/about" >Acerca de</a></li>
+          <li><a href="https://www.spartalaxion.com/">Inicio</a></li>
+          <li><a href="https://www.spartalaxion.com/about">Acerca de</a></li>
           <li><a href="https://www.spartalaxion.com/creators">Fotografía y Producción</a></li>
           <li><a href="https://www.spartalaxion.com/faq">FAQ</a></li>
           <li><a href="https://www.spartalaxion.com/contact">Contacto</a></li>
@@ -574,7 +561,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
           <img alt="Instagram" width="22" height="22"
                src="https://api.iconify.design/simple-icons/instagram.svg?color=%23000000" />
         </a>
-        <a href="https://www.tiktok.com/agenciaspartalaxion" target="_blank" rel="noopener" aria-label="TikTok">
+        <a href="https://www.tiktok.com/@agenciaspartalaxion?_t=ZS-8zqW166EGI5&_r=1" target="_blank" rel="noopener" aria-label="TikTok">
           <img alt="TikTok" width="22" height="22"
                src="https://api.iconify.design/simple-icons/tiktok.svg?color=%23000000" />
         </a>
@@ -583,7 +570,6 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
   </header>
 
   <script>
-    // Abrir/cerrar menú en mobile
     const header = document.querySelector('.site-header');
     const toggle = document.querySelector('.nav-toggle');
     toggle?.addEventListener('click', () => {
@@ -591,7 +577,6 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
-    // Marca automáticamente como activo el enlace que coincide con la URL actual (opcional)
     (function markActive(){
       const here = location.pathname.replace(/\/+$/,'');
       document.querySelectorAll('.main-nav a').forEach(a=>{
@@ -948,7 +933,7 @@ url("https://static.wixstatic.com/ufonts/9ae098_df6394d22ccb4ede9897b4583a6b28a7
                    <a aria-label="TikTok"
    class="oRtuWN"
    data-testid="linkElement"
-   href="https://www.tiktok.com/agenciaspartalaxion"
+   href="https://www.tiktok.com/@agenciaspartalaxion?_t=ZS-8zqW166EGI5&_r=1"
    rel="noreferrer noopener"
    target="_blank">
   <img
