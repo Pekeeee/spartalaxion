@@ -1276,38 +1276,34 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
 </style>
 
 <!-- EmailJS (misma lib que usaste en casseg) -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-(function () {
-  // ======= CONFIG (pon tus IDs/clave) =======
-  const EMAILJS_PUBLIC_KEY  = 'jCO1kUCp8ojVpV7Ig';      // ej: jC01kUCp8ojVpV7Ig
-  const EMAILJS_SERVICE_ID  = 'service_9e4g8vf';      // ej: service_9e4g8vf
-  const EMAILJS_TEMPLATE_ID = 'template_sdib5m5';     // ej: template_sdib5m5
-  // Si tu template usa {{to_email}} en el campo "To", pon aquí el destinatario:
-  const TO_EMAIL_OPTIONAL   = 'tucorreo@dominio.com'; // o déjalo '' si el template ya fija el destinatario
-  // ==========================================
+(() => {
+  // ===== CREDENCIALES (v4) =====
+  const PUBLIC_KEY  = 'jCO1kUCp8ojVpV7Ig';     // tu Public Key
+  const SERVICE_ID  = 'service_9e4g8vf';       // tu Service ID
+  const TEMPLATE_ID = 'template_sdib5m5';      // tu Template ID
+  const TO_EMAIL    = 'spartalaxion@gmail.com';// usa {{to_email}} en el campo "To" del template
+  // ==============================
 
-  // Init (como en casseg)
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  // Init v4 (nota la sintaxis)
+  emailjs.init({ publicKey: PUBLIC_KEY });
 
-  // Tu formulario actual
   const form = document.getElementById('comp-lbvdzxdz');
   if (!form) return;
 
-  // Referencias a tus campos (IDs originales)
   const el = {
     firstName: document.getElementById('input_comp-lbvdzxe6'),
     lastName:  document.getElementById('input_comp-lbvdzxel'),
     email:     document.getElementById('input_comp-lbvdzxeq1'),
     instagram: document.getElementById('input_comp-lctzkir9'),
-    phone:     document.getElementById('textarea_comp-lndrohxe'), // textarea
+    phone:     document.getElementById('textarea_comp-lndrohxe'),
     message:   document.getElementById('textarea_comp-lbvdzxey'),
     submitBtn: form.querySelector('#comp-lbvdzxf5 button'),
     statusBox: document.getElementById('comp-lbvdzxfh')
   };
 
-  // Helpers (igual de simples que en casseg)
   const setBusy = (b) => {
     if (!el.submitBtn) return;
     el.submitBtn.disabled = b;
@@ -1320,29 +1316,13 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
     if (p) { p.textContent = msg; p.style.color = ok ? '#0a7a28' : '#b00020'; }
     else { alert(msg); }
   };
-  const validate = () => {
-    let ok = true;
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    [el.firstName, el.lastName, el.email, el.instagram].forEach(i=>{
-      if (!i) return;
-      i.style.outline=''; i.style.borderColor='';
-      if (!i.value.trim()) { i.style.outline='1px solid #b00020'; i.style.borderColor='#b00020'; ok=false; }
-    });
-    if (el.email && !emailRe.test(el.email.value.trim())) { el.email.style.outline='1px solid #b00020'; el.email.style.borderColor='#b00020'; ok=false; }
-    return ok;
-  };
 
-  // Listener como en casseg
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!validate()) { showStatus('Revisa los campos marcados en rojo.', false); return; }
-    setBusy(true);
+    setBusy(true); showStatus('');
 
-    // Mapeo a variables del Template de EmailJS
-    // Crea en tu template: {{first_name}}, {{last_name}}, {{email}},
-    // {{instagram}}, {{phone}}, {{message}} y opcionalmente {{to_email}}
-    const templateParams = {
-      to_email:   TO_EMAIL_OPTIONAL || undefined,      // usa {{to_email}} en el campo "To" del template si quieres
+    const params = {
+      to_email:   TO_EMAIL,                                 // en el template pon To: {{to_email}} o deja fijo tu correo
       first_name: el.firstName?.value.trim() || '',
       last_name:  el.lastName?.value.trim()  || '',
       email:      el.email?.value.trim()     || '',
@@ -1351,21 +1331,21 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
       message:    el.message?.value.trim()   || ''
     };
 
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-      .then(function () {
-        showStatus('✅ Mensaje enviado con éxito', true);
-        [el.firstName, el.lastName, el.email, el.instagram, el.phone, el.message].forEach(i=>{ if(i) i.value=''; });
-      })
-      .catch(function (error) {
-        console.error('EmailJS ERROR:', error);
-        showStatus('❌ Error al enviar. Revisa la consola.', false);
-        // opcional: alert como en casseg
-        // alert("❌ Error al enviar: " + JSON.stringify(error));
-      })
-      .finally(()=> setBusy(false));
+    try {
+      const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, params);
+      console.log('EmailJS OK:', res);
+      [el.firstName, el.lastName, el.email, el.instagram, el.phone, el.message].forEach(i=>{ if(i) i.value=''; });
+      showStatus('✅ Mensaje enviado con éxito', true);
+    } catch (err) {
+      console.error('EmailJS ERROR:', err);
+      showStatus('❌ Error al enviar. Revisa la consola.', false);
+    } finally {
+      setBusy(false);
+    }
   });
 })();
 </script>
+
 
 
 </body></html>
