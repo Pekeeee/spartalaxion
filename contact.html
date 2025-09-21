@@ -839,21 +839,20 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
                           </div>
                         </div>
                       </form>
-<!-- Carga EmailJS desde CDN -->
+<!-- CDN EmailJS (v4) -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
 (() => {
-  // ================== CONFIG EMAILJS ==================
-  const EMAILJS_PUBLIC_KEY = 'jCO1kUCp8ojVpV7Ig';        // <- Reemplaza
-  const EMAILJS_SERVICE_ID = 'service_9e4g8vf';        // <- Reemplaza
-  const EMAILJS_TEMPLATE_ID = 'template_sdib5m5';      // <- Reemplaza
-  // ====================================================
+  // ====== TUS CREDENCIALES (de tus capturas) ======
+  const EMAILJS_PUBLIC_KEY = 'jC01kUCp8ojVpV7Ig';
+  const EMAILJS_SERVICE_ID = 'service_9e4g8vf';
+  const EMAILJS_TEMPLATE_ID = 'template_sdib5m5';
+  // ====== A QUIÉN LLEGA ======
+  const DESTINATARIO = 'spartalaxion@gmail.com'; // cámbialo si quieres otro
 
-  // Inicializa EmailJS
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
-  // Referencias a tu formulario y campos (no cambiamos tu HTML)
   const form = document.getElementById('comp-lbvdzxdz');
   if (!form) return;
 
@@ -862,7 +861,7 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
     lastName:  document.getElementById('input_comp-lbvdzxel'),
     email:     document.getElementById('input_comp-lbvdzxeq1'),
     instagram: document.getElementById('input_comp-lctzkir9'),
-    phone:     document.getElementById('textarea_comp-lndrohxe'), // textarea
+    phone:     document.getElementById('textarea_comp-lndrohxe'),
     message:   document.getElementById('textarea_comp-lbvdzxey'),
     submitBtn: form.querySelector('#comp-lbvdzxf5 button'),
     statusBox: document.getElementById('comp-lbvdzxfh')
@@ -886,24 +885,19 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
   };
 
   const validate = () => {
-    let valid = true;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    [el.firstName, el.lastName, el.email, el.instagram].forEach(inp => {
-      if (!inp) return;
-      inp.style.outline = ''; inp.style.borderColor = '';
+    let ok = true;
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    [el.firstName, el.lastName, el.email, el.instagram].forEach(i=>{
+      if (!i) return;
+      i.style.outline=''; i.style.borderColor='';
+      if (!i.value.trim()) { i.style.outline='1px solid #b00020'; i.style.borderColor='#b00020'; ok=false; }
     });
-    const bad = (inp) => { if (!inp) return; inp.style.outline='1px solid #b00020'; inp.style.borderColor='#b00020'; valid=false; };
-
-    if (!el.firstName?.value.trim()) bad(el.firstName);
-    if (!el.lastName?.value.trim())  bad(el.lastName);
-    if (!el.instagram?.value.trim()) bad(el.instagram);
-    if (!el.email?.value.trim() || !emailRegex.test(el.email.value.trim())) bad(el.email);
-    return valid;
+    if (el.email && (!emailRe.test(el.email.value.trim()))) { el.email.style.outline='1px solid #b00020'; el.email.style.borderColor='#b00020'; ok=false; }
+    return ok;
   };
 
-  // Mapea tus campos a las variables del Template de EmailJS
-  // En tu Template de EmailJS crea variables como: {{first_name}}, {{last_name}}, {{email}}, {{instagram}}, {{phone}}, {{message}}
-  const buildTemplateParams = () => ({
+  const buildParams = () => ({
+    to_email:   DESTINATARIO,                                // <- CLAVE
     first_name: el.firstName?.value.trim() || '',
     last_name:  el.lastName?.value.trim()  || '',
     email:      el.email?.value.trim()     || '',
@@ -912,34 +906,30 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
     message:    el.message?.value.trim()   || ''
   });
 
-  form.addEventListener('submit', async (ev) => {
-    ev.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
     showStatus('', true);
-
-    if (!validate()) {
-      showStatus('Revisa los campos marcados en rojo.', false);
-      return;
-    }
+    if (!validate()) return showStatus('Revisa los campos marcados en rojo.', false);
 
     setBusy(true);
     try {
-      const templateParams = buildTemplateParams();
-
-      // Envía vía EmailJS (desde el navegador)
+      const templateParams = buildParams();
       const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-
-      // Si todo bien, limpiamos y avisamos
-      [el.firstName, el.lastName, el.email, el.instagram, el.phone, el.message].forEach(inp => { if (inp) inp.value = ''; });
-      showStatus('¡Gracias! Tu información se envió correctamente. Te contactaremos pronto.', true);
+      // res = { status: 200, text: 'OK' } si todo salió bien
+      console.log('EmailJS OK:', res);
+      [el.firstName, el.lastName, el.email, el.instagram, el.phone, el.message].forEach(i=>{ if(i) i.value=''; });
+      showStatus('¡Enviado! Te contactaremos pronto.', true);
     } catch (err) {
-      console.error(err);
-      showStatus('Hubo un problema al enviar. Intenta de nuevo en un momento.', false);
+      // Te muestra el motivo exacto en consola (service/template inválido, dominio, etc.)
+      console.error('EmailJS ERROR:', err);
+      showStatus('No se pudo enviar. Reintenta más tarde.', false);
     } finally {
       setBusy(false);
     }
   });
 })();
 </script>
+
 
                     </div>
                   </div>
