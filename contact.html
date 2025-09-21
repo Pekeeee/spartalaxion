@@ -844,13 +844,14 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
 
 <script>
 (() => {
-  // ====== TUS CREDENCIALES (de tus capturas) ======
-  const EMAILJS_PUBLIC_KEY = 'jC01kUCp8ojVpV7Ig';
+  // ===== CREDENCIALES EXACTAS =====
+  const EMAILJS_PUBLIC_KEY = 'jC01kUCp8ojVpV7Ig';   // <- sin espacios extra
   const EMAILJS_SERVICE_ID = 'service_9e4g8vf';
   const EMAILJS_TEMPLATE_ID = 'template_sdib5m5';
-  // ====== A QUIÉN LLEGA ======
-  const DESTINATARIO = 'spartalaxion@gmail.com'; // cámbialo si quieres otro
+  const DESTINATARIO = 'spartalaxion@gmail.com';    // o el correo que quieras
 
+  // Init antes de cualquier send
+  console.log('PK:', EMAILJS_PUBLIC_KEY, 'len=', EMAILJS_PUBLIC_KEY.length);
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
   const form = document.getElementById('comp-lbvdzxdz');
@@ -874,61 +875,42 @@ url("https://static.wixstatic.com/ufonts/0b678c_d87218317904465c93d13848ee71a208
     const label = el.submitBtn.querySelector('.wixui-button__label');
     if (label) label.textContent = b ? 'Enviando…' : 'Enviar';
   };
-
   const showStatus = (msg, ok = true) => {
     if (!el.statusBox) return;
     const p = el.statusBox.querySelector('p') || el.statusBox;
     p.textContent = msg;
     p.style.color = ok ? '#0a7a28' : '#b00020';
-    p.setAttribute('role', 'status');
-    p.setAttribute('aria-live', 'polite');
   };
 
-  const validate = () => {
-    let ok = true;
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    [el.firstName, el.lastName, el.email, el.instagram].forEach(i=>{
-      if (!i) return;
-      i.style.outline=''; i.style.borderColor='';
-      if (!i.value.trim()) { i.style.outline='1px solid #b00020'; i.style.borderColor='#b00020'; ok=false; }
-    });
-    if (el.email && (!emailRe.test(el.email.value.trim()))) { el.email.style.outline='1px solid #b00020'; el.email.style.borderColor='#b00020'; ok=false; }
-    return ok;
-  };
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    setBusy(true); showStatus('');
 
-  const buildParams = () => ({
-    to_email:   DESTINATARIO,                                // <- CLAVE
-    first_name: el.firstName?.value.trim() || '',
-    last_name:  el.lastName?.value.trim()  || '',
-    email:      el.email?.value.trim()     || '',
-    instagram:  el.instagram?.value.trim() || '',
-    phone:      el.phone?.value.trim()     || '',
-    message:    el.message?.value.trim()   || ''
-  });
+    const params = {
+      to_email:   DESTINATARIO,                                // <-- usa {{to_email}} en el campo "To" del template
+      first_name: el.firstName?.value.trim() || '',
+      last_name:  el.lastName?.value.trim()  || '',
+      email:      el.email?.value.trim()     || '',
+      instagram:  el.instagram?.value.trim() || '',
+      phone:      el.phone?.value.trim()     || '',
+      message:    el.message?.value.trim()   || ''
+    };
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    showStatus('', true);
-    if (!validate()) return showStatus('Revisa los campos marcados en rojo.', false);
-
-    setBusy(true);
     try {
-      const templateParams = buildParams();
-      const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-      // res = { status: 200, text: 'OK' } si todo salió bien
+      const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
       console.log('EmailJS OK:', res);
       [el.firstName, el.lastName, el.email, el.instagram, el.phone, el.message].forEach(i=>{ if(i) i.value=''; });
       showStatus('¡Enviado! Te contactaremos pronto.', true);
     } catch (err) {
-      // Te muestra el motivo exacto en consola (service/template inválido, dominio, etc.)
       console.error('EmailJS ERROR:', err);
-      showStatus('No se pudo enviar. Reintenta más tarde.', false);
+      showStatus('No se pudo enviar. Revisa la consola.', false);
     } finally {
       setBusy(false);
     }
   });
 })();
 </script>
+
 
 
                     </div>
